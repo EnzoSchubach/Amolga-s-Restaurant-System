@@ -8,6 +8,8 @@ package com.amolga.mavenproject1;
  *
  * @author enzoschubach
  */
-public class Gerente {
+
+//new ItemCardapio(name, type, description, supplier, price);
+public class Manager {
     
 }
