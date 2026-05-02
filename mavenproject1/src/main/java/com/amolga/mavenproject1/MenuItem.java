@@ -8,11 +8,11 @@ package com.amolga.mavenproject1;
  *
  * @author enzoschubach
  */
-public class ItemCardapio {
+public class MenuItem {
     private double price;
     private String name, type, description, supplier;
     
-    public ItemCardapio(String name, String type, String description, String supplier, double price){
+    public MenuItem(String name, String type, String description, String supplier, double price){
         this.setPrice(price);
         this.setName(name);
         this.setType(type);
