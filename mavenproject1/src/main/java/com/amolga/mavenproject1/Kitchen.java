@@ -6,8 +6,8 @@ package com.amolga.mavenproject1;
 
 /**
  *
- * @author enzoschubach
+ * @author leticiadamata
  */
-public class Mesa {
+public class Kitchen {
     
 }
