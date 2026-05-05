@@ -10,10 +10,10 @@ package com.amolga.mavenproject1;
  */
 
 public class OrderItem {
-    private ItemCardapio item;
+    private MenuItem item;
     private int quantity;
     
-    public OrderItem(ItemCardapio item, int quantity){
+    public OrderItem(MenuItem item, int quantity){
         this.item = item;
         this.quantity = quantity;
     }
@@ -22,7 +22,7 @@ public class OrderItem {
         return item.getPrice() * quantity;
     }
     
-    public ItemCardapio getItem() {
+    public MenuItem getItem() {
     return item;
     }
 
