@@ -1,5 +1,4 @@
 package com.amolga.mavenproject1;
-
 import java.time.LocalDateTime;
 
 
@@ -43,14 +42,14 @@ public class Payment {
         System.out.println("===============================");
     }
 
-    // Getters
+    //getters
     public Order getOrder() { return order; }
     public Client getClient() { return client; }
     public Table getTable() { return table; }
     public String getPaymentMethod() { return paymentMethod; }
     public LocalDateTime getDateTime() { return dateTime; }
 
-    // Setters
+    //setters
     public void setOrder(Order order) {
         this.order = order;
     }
