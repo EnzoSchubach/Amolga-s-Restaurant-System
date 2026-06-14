@@ -64,7 +64,8 @@ public class Order {
         return total;
     }
     
-    public void finishOrder(){
+    public boolean finishOrder(){
         status = "Finished";
+        return true;
     }
 }

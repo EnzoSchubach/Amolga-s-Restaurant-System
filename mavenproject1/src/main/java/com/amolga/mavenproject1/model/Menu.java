@@ -11,6 +11,7 @@ import java.util.*;
  * @author enzoschubach
  */
 public class Menu {
+    
     private List<MenuItem> items;
     
     public Menu(){
