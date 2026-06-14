@@ -2,20 +2,23 @@ package com.amolga.mavenproject1.model;
 import java.util.ArrayList;
 
 public class Order {
+
     private int id;
-    private ArrayList<OrderItem> itens = new ArrayList<>();
+    private ArrayList<Item> itens = new ArrayList<>();
     private String status;
     
-    public Order(int id, String status){
+    public Order(int id, String status) {
+
         this.id = id;
         this.status = status;
+    
     }
     
     public int getId(){
         return id;
     }
 
-    public ArrayList<OrderItem> getItens(){
+    public ArrayList<Item> getItens(){
         return itens;
     }
 
@@ -27,7 +30,7 @@ public class Order {
         this.id = id;
     }
 
-    public void setItens(ArrayList<OrderItem> itens){
+    public void setItens(ArrayList<Item> itens){
         this.itens = itens;
     }
 
@@ -35,20 +38,24 @@ public class Order {
         this.status = status;
     }
     
-    public void addItem(OrderItem newItem){
+    public void addItem(Item newItem){
         itens.add(newItem);
     }
     
-    public void removeItem(OrderItem willDelete){
+    public void removeItem(Item willDelete){
         itens.remove(willDelete);
     }
     
-    public double calculateTotal(){
+    public double calculateTotal() {
+
         double total = 0;
-        for(OrderItem ip : itens){
-            total += ip.calculateSubTotal();
+        
+        for(Item ip : itens){ 
+            total += ip.getPrice(); 
         }
+        
         return total;
+    
     }
     
     public void finishOrder(){

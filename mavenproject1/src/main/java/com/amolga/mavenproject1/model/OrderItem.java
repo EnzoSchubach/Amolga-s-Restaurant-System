@@ -10,6 +10,7 @@ package com.amolga.mavenproject1.model;
  */
 
 public class OrderItem {
+    
     private MenuItem item;
     private int quantity;
     
