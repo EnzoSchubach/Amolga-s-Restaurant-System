@@ -12,16 +12,14 @@ public class Item {
 
     private double price;
     private String name, type, description, supplier;
-    private int quantity;
     
     public Item(String name, String type, String description, String supplier, double price) {
 
         this.price = price;
-        this.name = name;;
+        this.name = name;
         this.type = type;
         this.description = description;
         this.supplier = supplier;
-        this.quantity = 1;
     
     }
     
@@ -35,14 +33,6 @@ public class Item {
 
     public String getName() {
         return name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public void setName(String name) {
@@ -72,4 +62,5 @@ public class Item {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
+
 }

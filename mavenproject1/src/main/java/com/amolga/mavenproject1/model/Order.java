@@ -41,16 +41,6 @@ public class Order {
     public void addItem(Item newItem){
         itens.add(newItem);
     }
-
-    public void repeatItem(Item repeatedItem) {
-
-        for (Item item : itens) {
-
-            if (item == repeatedItem) item.setQuantity(item.getQuantity() + 1);
-
-        }
-
-    }
     
     public void removeItem(Item willDelete){
         itens.remove(willDelete);
@@ -59,13 +49,12 @@ public class Order {
     public double calculateTotal() {
 
         double total = 0;
-        
-        for(Item ip : itens){ 
-            total += ip.getPrice(); 
+
+        for (Item item : itens) {
+            total += item.getPrice();
         }
-        
+
         return total;
-    
     }
     
     public void finishOrder(){
