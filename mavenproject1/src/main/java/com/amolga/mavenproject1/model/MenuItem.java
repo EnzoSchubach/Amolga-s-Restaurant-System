@@ -8,12 +8,12 @@ package com.amolga.mavenproject1.model;
  *
  * @author enzoschubach
  */
-public class Item {
+public class MenuItem {
 
     private double price;
     private String name, type, description, supplier;
     
-    public Item(String name, String type, String description, String supplier, double price) {
+    public MenuItem(String name, String type, String description, String supplier, double price) {
 
         this.price = price;
         this.name = name;

@@ -1,24 +1,27 @@
 package com.amolga.mavenproject1.model;
-import java.util.ArrayList;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Order {
 
     private int id;
-    private ArrayList<Item> itens = new ArrayList<>();
+    private HashMap<MenuItem, Integer> itens;
     private String status;
     
     public Order(int id, String status) {
 
         this.id = id;
         this.status = status;
-    
+        this.itens = new HashMap<>();
+
     }
     
     public int getId(){
         return id;
     }
 
-    public ArrayList<Item> getItens(){
+    public HashMap<MenuItem, Integer> getItens(){
         return itens;
     }
 
@@ -30,7 +33,7 @@ public class Order {
         this.id = id;
     }
 
-    public void setItens(ArrayList<Item> itens){
+    public void setItens(HashMap<MenuItem, Integer> itens){
         this.itens = itens;
     }
 
@@ -38,11 +41,14 @@ public class Order {
         this.status = status;
     }
     
-    public void addItem(Item newItem){
-        itens.add(newItem);
+    public void addItem(MenuItem newItem) {
+
+        int actualQuantity = itens.getOrDefault(newItem, 1);
+        itens.put(newItem, actualQuantity + 1);
+    
     }
     
-    public void removeItem(Item willDelete){
+    public void removeItem(MenuItem willDelete){
         itens.remove(willDelete);
     }
     
@@ -50,8 +56,9 @@ public class Order {
 
         double total = 0;
 
-        for (Item item : itens) {
-            total += item.getPrice();
+        for (Map.Entry<MenuItem, Integer> item : itens.entrySet()) {
+            double itemPrice = item.getKey().getPrice();
+            total += itemPrice * item.getValue();
         }
 
         return total;
