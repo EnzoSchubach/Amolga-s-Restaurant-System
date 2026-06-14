@@ -6,14 +6,14 @@ import java.util.Map;
 public class Order {
 
     private int id;
-    private HashMap<MenuItem, Integer> itens;
+    private HashMap<MenuItem, Integer> items;
     private String status;
     
     public Order(int id, String status) {
 
         this.id = id;
         this.status = status;
-        this.itens = new HashMap<>();
+        this.items = new HashMap<>();
 
     }
     
@@ -22,7 +22,7 @@ public class Order {
     }
 
     public HashMap<MenuItem, Integer> getItens(){
-        return itens;
+        return items;
     }
 
     public String getStatus(){
@@ -33,8 +33,8 @@ public class Order {
         this.id = id;
     }
 
-    public void setItens(HashMap<MenuItem, Integer> itens){
-        this.itens = itens;
+    public void setItens(HashMap<MenuItem, Integer> items){
+        this.items = items;
     }
 
     public void setStatus(String status){
@@ -43,20 +43,20 @@ public class Order {
     
     public void addItem(MenuItem newItem) {
 
-        int actualQuantity = itens.getOrDefault(newItem, 1);
-        itens.put(newItem, actualQuantity + 1);
+        int actualQuantity = items.getOrDefault(newItem, 1);
+        items.put(newItem, actualQuantity + 1);
     
     }
     
     public void removeItem(MenuItem willDelete){
-        itens.remove(willDelete);
+        items.remove(willDelete);
     }
     
     public double calculateTotal() {
 
         double total = 0;
 
-        for (Map.Entry<MenuItem, Integer> item : itens.entrySet()) {
+        for (Map.Entry<MenuItem, Integer> item : items.entrySet()) {
             double itemPrice = item.getKey().getPrice();
             total += itemPrice * item.getValue();
         }
