@@ -11,24 +11,24 @@ import java.util.*;
  * @author enzoschubach
  */
 public class Menu {
-    private List<MenuItem> items;
+    private List<Item> items;
     
     public Menu(){
         this.items = new ArrayList<>();
     }
     
-    public void addItem(MenuItem newItem){
+    public void addItem(Item newItem){
         this.items.add(newItem);
     }
     
-    public void rmvItem(MenuItem rmvItem){
+    public void rmvItem(Item rmvItem){
         this.items.remove(rmvItem);
     }
     
-    public boolean findItem(MenuItem findItem){
+    public boolean findItem(Item findItem){
         boolean in_cardapio = false;
         
-        for(MenuItem item : items){
+        for(Item item : items){
             if(findItem.equals(item)) in_cardapio = true; break;
         }
         
@@ -38,7 +38,7 @@ public class Menu {
     public void listItems(){
         int cont = 0;
         
-        for(MenuItem item : items){
+        for(Item item : items){
             cont++;
             System.out.println("Item n" + cont + ": " + item);
         }

@@ -14,14 +14,14 @@ public class Item {
     private String name, type, description, supplier;
     private int quantity;
     
-    public Item(String name, String type, String description, String supplier, double price, int quantity) {
+    public Item(String name, String type, String description, String supplier, double price) {
 
         this.price = price;
         this.name = name;;
         this.type = type;
         this.description = description;
         this.supplier = supplier;
-        this.quantity = quantity;
+        this.quantity = 1;
     
     }
     

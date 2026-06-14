@@ -41,6 +41,16 @@ public class Order {
     public void addItem(Item newItem){
         itens.add(newItem);
     }
+
+    public void repeatItem(Item repeatedItem) {
+
+        for (Item item : itens) {
+
+            if (item == repeatedItem) item.setQuantity(item.getQuantity() + 1);
+
+        }
+
+    }
     
     public void removeItem(Item willDelete){
         itens.remove(willDelete);
