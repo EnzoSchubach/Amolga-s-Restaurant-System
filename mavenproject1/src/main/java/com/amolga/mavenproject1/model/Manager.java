@@ -1,4 +1,4 @@
-package com.amolga.mavenproject1;
+package com.amolga.mavenproject1.model;
 
 public class Manager {
     

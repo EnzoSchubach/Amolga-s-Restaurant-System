@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.amolga.mavenproject1;
+package com.amolga.mavenproject1.model;
 
 import java.util.*;
 
@@ -11,6 +11,7 @@ import java.util.*;
  * @author enzoschubach
  */
 public class Menu {
+    
     private List<MenuItem> items;
     
     public Menu(){

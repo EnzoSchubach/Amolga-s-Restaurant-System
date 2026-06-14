@@ -2,22 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.amolga.mavenproject1;
+package com.amolga.mavenproject1.model;
 
 /**
  *
  * @author enzoschubach
  */
 public class MenuItem {
+
     private double price;
     private String name, type, description, supplier;
     
-    public MenuItem(String name, String type, String description, String supplier, double price){
-        this.setPrice(price);
-        this.setName(name);
-        this.setType(type);
-        this.setDescription(description);
-        this.setSupplier(supplier);
+    public MenuItem(String name, String type, String description, String supplier, double price) {
+
+        this.price = price;
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.supplier = supplier;
+    
     }
     
     public double getPrice() {
@@ -59,4 +62,5 @@ public class MenuItem {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
+
 }
