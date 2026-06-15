@@ -8,6 +8,14 @@ package com.amolga.mavenproject1.model;
  *
  * @author enzoschubach
  */
-public class Food {
+public class Food extends MenuItem{
+    private String description;
     
+    Food(String name, double price, String description){
+        super(name, price);
+        this.setDescription(description);
+    }
+    
+    public void setDescription(String newDescription){ this.description = newDescription; }
+    public String getDescription(){ return this.description; }
 }

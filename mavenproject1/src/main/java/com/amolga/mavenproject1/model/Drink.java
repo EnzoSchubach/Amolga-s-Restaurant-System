@@ -8,6 +8,14 @@ package com.amolga.mavenproject1.model;
  *
  * @author enzoschubach
  */
-public class Drink {
+public class Drink extends MenuItem {
+    private String supplier;
     
+    Drink(String name, double price, String supplier){
+        super(name, price);
+        this.setSupplier(supplier);
+    }
+    
+    public void setSupplier(String newSupplier){ this.supplier = newSupplier; }
+    public String getSupplier(){ return this.supplier; }
 }
