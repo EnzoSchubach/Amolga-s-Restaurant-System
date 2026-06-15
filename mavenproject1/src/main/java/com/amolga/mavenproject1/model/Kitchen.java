@@ -20,7 +20,7 @@ public class Kitchen {
     }
 
     public void viewOpenOrder() {
-        System.out.println("Pedidos abertos:");
+        System.out.println("Open orders:");
         for (Order o : orders) {
             if (!o.getStatus().equalsIgnoreCase("Finished")) {
                 System.out.println("Pedido ID: " + o.getId());
@@ -30,8 +30,8 @@ public class Kitchen {
         }
     }
 
-    public void entregarPedido(Order order) {
+    public void deliverOrder(Order order) {
         order.finishOrder();
-        System.out.println("Pedido " + order.getId() + " entregue.");
+        System.out.println("Order " + order.getId() + " delivered.");
     }
 }
