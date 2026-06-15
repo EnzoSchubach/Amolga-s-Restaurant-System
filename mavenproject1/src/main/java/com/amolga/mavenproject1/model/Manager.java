@@ -24,9 +24,6 @@ public class Manager {
     public void consultItem(MenuItem consultItem){
         if(this.mainMenu.findItem(consultItem)){
             System.out.println("Nome: " + consultItem.getName() + "\n");
-            System.out.println("Tipo: " + consultItem.getType() + "\n");
-            System.out.println("Descricao: " + consultItem.getDescription() + "\n");
-            System.out.println("Fornecedor: " + consultItem.getSupplier() + "\n");
             System.out.println("Preco: " + consultItem.getPrice() + "\n");
         } else {
             System.out.println("Esse item não está no menu\n");
