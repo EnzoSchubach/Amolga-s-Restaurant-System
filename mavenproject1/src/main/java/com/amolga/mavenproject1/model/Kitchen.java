@@ -9,19 +9,24 @@ import java.util.*;
  * @author leticiadamata
  */
 public class Kitchen {
-    private ArrayList<Order> orders;
+    
+    private ArrayList<Order> pendingOrders;
 
     public Kitchen() {
-        orders = new ArrayList<>();
+        pendingOrders = new ArrayList<>();
     }
 
     public void addOrder(Order order) {
-        orders.add(order);
+        pendingOrders.add(order);
     }
-
+    
+    public ArrayList<Order> getpendingOrders() {
+        return pendingOrders;
+    }
+    
     public void viewOpenOrder() {
         System.out.println("Pedidos abertos:");
-        for (Order o : orders) {
+        for (Order o : pendingOrders) {
             if (!o.getStatus().equalsIgnoreCase("Finished")) {
                 System.out.println("Pedido ID: " + o.getId());
                 System.out.println("Status: " + o.getStatus());
@@ -30,8 +35,9 @@ public class Kitchen {
         }
     }
 
-    public void entregarPedido(Order order) {
+    public void deliverOrder(Order order) {
         order.finishOrder();
+
         System.out.println("Pedido " + order.getId() + " entregue.");
     }
 }
