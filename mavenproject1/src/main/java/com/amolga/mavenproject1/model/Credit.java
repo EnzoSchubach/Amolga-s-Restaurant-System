@@ -4,10 +4,7 @@
  */
 package com.amolga.mavenproject1.model;
 
-/**
- *
- * @author mirella
- */
+
 public class Credit extends PaymentMethod {
     private boolean isInInstallments;
 
@@ -26,7 +23,6 @@ public class Credit extends PaymentMethod {
 
     @Override
     public double calcValue(double baseValue) {
-        // Se for parcelado, podemos aplicar um acréscimo na taxa, por exemplo
         double effectiveFee = isInInstallments ? (administrativeFee + 0.02) : administrativeFee;
         return baseValue * (1 + effectiveFee);
     }

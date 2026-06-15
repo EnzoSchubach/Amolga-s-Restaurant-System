@@ -4,10 +4,6 @@
  */
 package com.amolga.mavenproject1.model;
 
-/**
- *
- * @author mirella
- */
 public class Debit extends PaymentMethod {
 
     public Debit(double administrativeFee) {
