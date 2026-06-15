@@ -29,11 +29,5 @@ public abstract class PaymentMethod {
         this.methodName = methodName;
     }
 
-    /**
-     * Calcula o valor final da compra considerando a taxa administrativa.
-     * 
-     * @param baseValue O valor base da compra antes da taxa.
-     * @return O valor final após aplicação da taxa.
-     */
     public abstract double calcValue(double baseValue);
 }
