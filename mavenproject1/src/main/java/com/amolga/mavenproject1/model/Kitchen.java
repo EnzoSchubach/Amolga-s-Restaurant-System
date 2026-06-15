@@ -16,7 +16,7 @@ public class Kitchen {
         pendingOrders = new ArrayList<>();
     }
 
-    public void addOrder(Order order) {
+    public void receiveOrder(Order order) {
         pendingOrders.add(order);
     }
     
