@@ -36,7 +36,18 @@ public class Kitchen {
     }
 
     public void deliverOrder(Order order) {
+        
         order.finishOrder();
+
+        for (Order finishedOrder : pendingOrders) {
+
+            if (finishedOrder == order) {
+
+                pendingOrders.remove(order);
+
+            }
+
+        }
 
         System.out.println("Pedido " + order.getId() + " entregue.");
     }
