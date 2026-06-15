@@ -9,10 +9,9 @@ public class Order {
     private HashMap<MenuItem, Integer> items;
     private OrderStatus status;
     
-    public Order(int id, String status) {
+    public Order(int id) {
 
         this.id = id;
-        this.status = status;
         this.items = new HashMap<>();
         this.status = OrderStatus.PENDING;
     
@@ -26,7 +25,7 @@ public class Order {
         return items;
     }
 
-    public String getStatus(){
+    public OrderStatus getStatus(){
         return status;
     }
 
@@ -37,11 +36,19 @@ public class Order {
     public void setItens(HashMap<MenuItem, Integer> items){
         this.items = items;
     }
-
-    public void setStatus(String status){
-        this.status = status;
+    
+    public void finishOrder(){ 
+        status = OrderStatus.FINISHED; 
     }
     
+    public void deliveredOrder() { 
+        status = OrderStatus.DELIVERED; 
+    }
+
+    public void pendingOrder() {
+        status = OrderStatus.PENDING;
+    }
+
     public void addItem(MenuItem newItem) {
 
         int actualQuantity = items.getOrDefault(newItem, 1);
@@ -65,12 +72,5 @@ public class Order {
         return total;
     }
     
-    public void finishOrder(){ 
-        status = OrderStatus.FINISHED; 
-    }
-    
-    public void deliveredOrder() { 
-        status = OrderStatus.DELIVERED; 
-    }
 
 }
