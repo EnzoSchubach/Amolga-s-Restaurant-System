@@ -7,8 +7,13 @@ public class Manager {
         this.mainMenu = mainMenu;
     }
     
-    public void registerItem(String name, String type, String description, String supplier, double price){
-        MenuItem newItem = new MenuItem(name, type, description, supplier, price);
+    public void registerFood(String name, double price, String description){
+        MenuItem newItem = new Food(name, price, description);
+        this.mainMenu.addItem(newItem);
+    }
+    
+    public void registerDrink(String name, double price, String supplier){
+        MenuItem newItem = new Drink(name, price, supplier);
         this.mainMenu.addItem(newItem);
     }
     
