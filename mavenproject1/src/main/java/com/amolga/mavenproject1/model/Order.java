@@ -7,14 +7,15 @@ public class Order {
 
     private int id;
     private HashMap<MenuItem, Integer> items;
-    private String status;
+    private OrderStatus status;
     
     public Order(int id, String status) {
 
         this.id = id;
         this.status = status;
         this.items = new HashMap<>();
-
+        this.status = OrderStatus.PENDING;
+    
     }
     
     public int getId(){
@@ -64,8 +65,12 @@ public class Order {
         return total;
     }
     
-    public boolean finishOrder(){
-        status = "Finished";
-        return true;
+    public void finishOrder(){ 
+        status = OrderStatus.FINISHED; 
     }
+    
+    public void deliveredOrder() { 
+        status = OrderStatus.DELIVERED; 
+    }
+
 }
