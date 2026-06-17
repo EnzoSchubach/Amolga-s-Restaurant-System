@@ -27,7 +27,7 @@ public class Kitchen {
     public void viewOpenOrder() {
         System.out.println("Open orders:");
         for (Order o : orders) {
-            if (!o.getStatus().equalsIgnoreCase("Finished")) {
+            if (o.getStatus() != OrderStatus.FINISHED) {
                 System.out.println("Pedido ID: " + o.getId());
                 System.out.println("Status: " + o.getStatus());
                 System.out.println("----------------------");
