@@ -25,9 +25,15 @@ public class Kitchen {
     }
     
     public void viewOpenOrder() {
+<<<<<<< HEAD
         System.out.println("Pedidos abertos:");
         for (Order o : pendingOrders) {
             if (o.getStatus() == OrderStatus.PENDING) {
+=======
+        System.out.println("Open orders:");
+        for (Order o : orders) {
+            if (!o.getStatus().equalsIgnoreCase("Finished")) {
+>>>>>>> main
                 System.out.println("Pedido ID: " + o.getId());
                 System.out.println("Status: " + o.getStatus());
                 System.out.println("----------------------");
@@ -36,10 +42,15 @@ public class Kitchen {
     }
 
     public void deliverOrder(Order order) {
+<<<<<<< HEAD
         
         order.finishOrder();
         pendingOrders.remove(order);
 
         System.out.println("Pedido " + order.getId() + " entregue.");
+=======
+        order.finishOrder();
+        System.out.println("Order " + order.getId() + " delivered.");
+>>>>>>> main
     }
 }
