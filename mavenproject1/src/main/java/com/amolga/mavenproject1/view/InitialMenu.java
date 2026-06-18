@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package com.amolga.mavenproject1.view;
 
 import java.util.*;
-import Model.Client;
+import com.amolga.mavenproject1.model.*;
 /**
  *
  * @author enzoschubach
@@ -181,7 +181,7 @@ public class InitialMenu extends javax.swing.JFrame{
     }//GEN-LAST:event_cpfTextActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Client newClient = new Client(cpfText.getText(), nameText.getText(), emailText.getText(), passwordText.getText());
+        Client newClient = new Client(cpfText.getText(), nameText.getText(), emailText.getText(), passwordText.getText(), 0.0);
         abc.setText(newClient.getName());
     }//GEN-LAST:event_jButton1ActionPerformed
 
