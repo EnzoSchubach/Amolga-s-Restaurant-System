@@ -30,10 +30,10 @@ public class Kitchen {
         for (Order o : pendingOrders) {
             if (o.getStatus() == OrderStatus.PENDING) {
         System.out.println("Open orders:");
-        for (Order o : orders) {
-            if (!o.getStatus().equalsIgnoreCase("Finished")) {
+        for (Order o : pendingOrders) {
+            if (o.getStatus() != OrderStatus.FINISHED) {
         System.out.println("Open orders:");
-        for (Order o : orders) {
+        for (Order o : pendingOrders) {
             if (o.getStatus() != OrderStatus.FINISHED) {
                 System.out.println("Pedido ID: " + o.getId());
                 System.out.println("Status: " + o.getStatus());
