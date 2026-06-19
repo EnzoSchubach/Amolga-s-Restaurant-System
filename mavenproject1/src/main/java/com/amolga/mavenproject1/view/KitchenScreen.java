@@ -6,6 +6,11 @@ package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Kitchen;
 import javax.swing.DefaultListModel;
+import com.amolga.mavenproject1.model.Order;
+import com.amolga.mavenproject1.model.MenuItem;
+import com.amolga.mavenproject1.model.Food;
+import java.util.Map;
+
 /**
  *
  * @author felipetinel
@@ -20,12 +25,24 @@ public class KitchenScreen extends javax.swing.JFrame {
      * Creates new form KitchenScreen
      */
     public KitchenScreen() {
+        
         initComponents();
         kitchen = new Kitchen ();
         jList1.setModel(orderList);
         
-        orderList.addElement("Pedido 1");
-        orderList.addElement("Pedido 2");
+        Order order_test1 = new Order();
+        Order order_test2 = new Order();
+        
+        MenuItem item1 = new Food("Hambuger", 40.0, "Gostoso");
+        MenuItem item2 = new Food("Chocolate", 10.0, "Gostoso tambem");
+        
+        
+        order_test1.addItem(item2);
+        order_test2.addItem(item1);
+        order_test2.addItem(item1);
+        
+        orderList.addElement(showOrder(order_test1));
+        orderList.addElement(showOrder(order_test2));
         
     }
 
@@ -109,6 +126,25 @@ public class KitchenScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
  
+    String showOrder (Order order) {
+       
+        String orderOpened = "";
+        
+        orderOpened += order.getId() + " ";
+        
+        for (var item : order.getItems().entrySet()) {
+            
+            String itemName = item.getKey().getName();
+            Integer quantity = item.getValue();
+            
+            orderOpened = orderOpened + itemName + " x" + quantity + ", ";
+            
+        }
+        
+        return orderOpened;
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -131,7 +167,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new KitchenScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new KitchenScreen().setVisible(true));        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
