@@ -11,7 +11,6 @@ public class PaymentScreen extends javax.swing.JFrame {
 
     private Bill bill;
 
-    // Swing Components
     private JLabel lblTableName;
     private JLabel lblClientName;
     private JRadioButton rbDebit;
@@ -29,7 +28,6 @@ public class PaymentScreen extends javax.swing.JFrame {
     private JButton btnCalculate;
     private JButton btnProcess;
 
-    // Constructor receiving Bill
     public PaymentScreen(Bill bill) {
         this.bill = bill;
         initComponents();
@@ -47,41 +45,34 @@ public class PaymentScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        // Top Panel: Title
         JPanel pnlTitle = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel lblTitle = new JLabel("TELA DE PAGAMENTO");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 18));
         pnlTitle.add(lblTitle);
         add(pnlTitle, BorderLayout.NORTH);
 
-        // Center Panel: Left (Form) and Right (Details)
         JPanel pnlCenter = new JPanel(new GridLayout(1, 2, 15, 15));
         pnlCenter.setBorder(BorderFactory.createEmptyBorder(10, 15, 15, 15));
         add(pnlCenter, BorderLayout.CENTER);
 
-        // Left Panel: Form controls container
         JPanel pnlLeft = new JPanel(new BorderLayout(10, 10));
         pnlCenter.add(pnlLeft);
 
-        // Grid form for labels and fields
         JPanel pnlForm = new JPanel(new GridLayout(8, 2, 5, 12));
         pnlForm.setBorder(BorderFactory.createTitledBorder("Informações de Pagamento"));
         pnlLeft.add(pnlForm, BorderLayout.NORTH);
 
-        // Mesa
         pnlForm.add(new JLabel("  Mesa:"));
         lblTableName = new JLabel("N/A");
         lblTableName.setFont(new Font("Arial", Font.BOLD, 12));
         pnlForm.add(lblTableName);
 
-        // Cliente
         pnlForm.add(new JLabel("  Cliente:"));
         lblClientName = new JLabel("N/A");
         lblClientName.setFont(new Font("Arial", Font.BOLD, 12));
         pnlForm.add(lblClientName);
 
-        // Método
-        pnlForm.add(new JLabel("  Método:"));
+        pnlForm.add(new JLabel("  Forma de pagamento:"));
         JPanel pnlMethod = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         rbDebit = new JRadioButton("Débito", true);
         rbCredit = new JRadioButton("Crédito", false);
@@ -92,39 +83,33 @@ public class PaymentScreen extends javax.swing.JFrame {
         pnlMethod.add(rbCredit);
         pnlForm.add(pnlMethod);
 
-        // Taxa
         pnlForm.add(new JLabel("  Taxa Adm (%):"));
         tfFee = new JLabel("2.0");
         tfFee.setFont(new Font("Arial", Font.BOLD, 12));
         pnlForm.add(tfFee);
 
-        // Parcelado
         pnlForm.add(new JLabel("  Parcelas:"));
         cbInstallments = new JComboBox<>(new String[]{"1x (À vista)", "2x", "3x"});
         cbInstallments.setEnabled(false);
         pnlForm.add(cbInstallments);
 
-        // Subtotal
         pnlForm.add(new JLabel("  Subtotal:"));
         lblSubtotal = new JLabel("R$ 0,00");
         lblSubtotal.setFont(new Font("Arial", Font.PLAIN, 12));
         pnlForm.add(lblSubtotal);
 
-        // Desconto
         pnlForm.add(new JLabel("  Desconto Bônus:"));
         lblDiscount = new JLabel("R$ 0,00");
         lblDiscount.setForeground(new Color(0, 128, 0));
         lblDiscount.setFont(new Font("Arial", Font.BOLD, 12));
         pnlForm.add(lblDiscount);
 
-        // Total
         pnlForm.add(new JLabel("  Total a Pagar:"));
         lblTotal = new JLabel("R$ 0,00");
         lblTotal.setFont(new Font("Arial", Font.BOLD, 14));
         lblTotal.setForeground(Color.RED);
         pnlForm.add(lblTotal);
 
-        // Buttons Panel at the bottom of the left column
         JPanel pnlButtons = new JPanel(new GridLayout(2, 1, 5, 5));
         pnlButtons.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         pnlLeft.add(pnlButtons, BorderLayout.SOUTH);
@@ -135,7 +120,6 @@ public class PaymentScreen extends javax.swing.JFrame {
         btnProcess = new JButton("Confirmar Pagamento");
         pnlButtons.add(btnProcess);
 
-        // Right Panel: Details and Receipt
         JPanel pnlDetails = new JPanel(new GridLayout(2, 1, 10, 10));
         pnlCenter.add(pnlDetails);
 
@@ -155,7 +139,6 @@ public class PaymentScreen extends javax.swing.JFrame {
         spReceipt.setBorder(BorderFactory.createTitledBorder("Recibo de Pagamento Gerado"));
         pnlDetails.add(spReceipt);
 
-        // Event Listeners
         rbDebit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -346,7 +329,6 @@ public class PaymentScreen extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -358,7 +340,6 @@ public class PaymentScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PaymentScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new PaymentScreen(null).setVisible(true));
     }
 }
