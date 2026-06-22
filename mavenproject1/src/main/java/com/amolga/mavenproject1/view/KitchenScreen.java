@@ -144,7 +144,15 @@ public class KitchenScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_finishButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        // TODO add your handling code here:
+        
+        orderList.clear();
+        
+        for (Order order : kitchen.getpendingOrders()) {
+            
+            orderList.addElement(showOrder(order));
+            
+        }
+        
     }//GEN-LAST:event_updateButtonActionPerformed
  
     String showOrder (Order order) {
