@@ -29,22 +29,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         initComponents();
         kitchen = new Kitchen ();
         ordersOpened.setModel(orderList);
-        
-        Order order_test1 = new Order();
-        Order order_test2 = new Order();
-        
-        MenuItem item1 = new Food("Hambuger", 40.0, "Gostoso");
-        MenuItem item2 = new Food("Chocolate", 10.0, "Gostoso tambem");
-        
-        
-        order_test1.addItem(item2);
-        order_test2.addItem(item1);
-        order_test2.addItem(item1);
-        order_test2.addItem(item2);
-        
-        orderList.addElement(showOrder(order_test1));
-        orderList.addElement(showOrder(order_test2));
-        
+      
     }
 
     /**
@@ -139,7 +124,11 @@ public class KitchenScreen extends javax.swing.JFrame {
             return;          
         }
         
-        orderList.remove(selectedIndex);
+        Order orderSelected = kitchen.getpendingOrders().get(selectedIndex);
+        
+        kitchen.deliverOrder(orderSelected);
+        
+        orderList.remove(selectedIndex);    
         
     }//GEN-LAST:event_finishButtonActionPerformed
 
@@ -147,11 +136,8 @@ public class KitchenScreen extends javax.swing.JFrame {
         
         orderList.clear();
         
-        for (Order order : kitchen.getpendingOrders()) {
+        for (Order order : kitchen.getpendingOrders()) orderList.addElement(showOrder(order));
             
-            orderList.addElement(showOrder(order));
-            
-        }
         
     }//GEN-LAST:event_updateButtonActionPerformed
  
@@ -161,17 +147,13 @@ public class KitchenScreen extends javax.swing.JFrame {
         
         orderOpened += order.getId() + " ";
         
-        for (var item : order.getItems().entrySet()) {
-            
+        for (var item : order.getItems().entrySet()) {           
             String itemName = item.getKey().getName();
-            Integer quantity = item.getValue();
-            
-            orderOpened = orderOpened + itemName + " x" + quantity + ", ";
-            
+            Integer quantity = item.getValue();     
+            orderOpened = orderOpened + itemName + " x" + quantity + ", ";   
         }
         
-        return orderOpened;
-        
+        return orderOpened;      
     }
     
     /**
