@@ -28,7 +28,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         
         initComponents();
         kitchen = new Kitchen ();
-        jList1.setModel(orderList);
+        ordersOpened.setModel(orderList);
         
         Order order_test1 = new Order();
         Order order_test2 = new Order();
@@ -60,7 +60,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        ordersOpened = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,8 +72,8 @@ public class KitchenScreen extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
-        jList1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        ordersOpened.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jScrollPane1.setViewportView(ordersOpened);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,6 +124,15 @@ public class KitchenScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        int selectedIndex = ordersOpened.getSelectedIndex();
+        
+        if (selectedIndex == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Não há pedido selecionado.");
+            return;          
+        }
+        
+        orderList.remove(selectedIndex);
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
  
@@ -174,8 +183,8 @@ public class KitchenScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> ordersOpened;
     // End of variables declaration//GEN-END:variables
 }
