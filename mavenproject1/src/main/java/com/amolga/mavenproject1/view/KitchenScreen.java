@@ -40,6 +40,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         order_test1.addItem(item2);
         order_test2.addItem(item1);
         order_test2.addItem(item1);
+        order_test2.addItem(item2);
         
         orderList.addElement(showOrder(order_test1));
         orderList.addElement(showOrder(order_test2));
