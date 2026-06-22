@@ -138,7 +138,6 @@ public class KitchenScreen extends javax.swing.JFrame {
         
         for (Order order : kitchen.getpendingOrders()) orderList.addElement(showOrder(order));
             
-        
     }//GEN-LAST:event_updateButtonActionPerformed
  
     String showOrder (Order order) {
