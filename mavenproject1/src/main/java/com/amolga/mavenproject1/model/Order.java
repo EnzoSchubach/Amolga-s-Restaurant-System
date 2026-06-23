@@ -5,13 +5,14 @@ import java.util.Map;
 
 public class Order {
 
+    static private int orderId = 1;
     private int id;
     private HashMap<MenuItem, Integer> items;
     private OrderStatus status;
     
-    public Order(int id) {
+    public Order() {
 
-        this.id = id;
+        this.id = orderId++;
         this.items = new HashMap<>();
         this.status = OrderStatus.PENDING;
     
@@ -21,7 +22,7 @@ public class Order {
         return id;
     }
 
-    public HashMap<MenuItem, Integer> getItens(){
+    public HashMap<MenuItem, Integer> getItems(){
         return items;
     }
 
@@ -51,7 +52,7 @@ public class Order {
 
     public void addItem(MenuItem newItem) {
 
-        int actualQuantity = items.getOrDefault(newItem, 1);
+        int actualQuantity = items.getOrDefault(newItem, 0);
         items.put(newItem, actualQuantity + 1);
     
     }

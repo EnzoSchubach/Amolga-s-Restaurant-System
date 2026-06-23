@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Kitchen {
     
-    private ArrayList<Order> pendingOrders;
+    static private ArrayList<Order> pendingOrders;
 
     public Kitchen() {
         pendingOrders = new ArrayList<>();
@@ -23,20 +23,14 @@ public class Kitchen {
     public ArrayList<Order> getpendingOrders() {
         return pendingOrders;
     }
-    
-    public void viewOpenOrder() {
-        System.out.println("Open orders:");
-        for (Order o : orders) {
-            if (o.getStatus() != OrderStatus.FINISHED) {
-                System.out.println("Pedido ID: " + o.getId());
-                System.out.println("Status: " + o.getStatus());
-                System.out.println("----------------------");
-            }
-        }
-    }
 
     public void deliverOrder(Order order) {
+        
         order.finishOrder();
-        System.out.println("Order " + order.getId() + " delivered.");
+        pendingOrders.remove(order);
+
+        System.out.println("Pedido " + order.getId() + " entregue.");
+        
+
     }
 }
