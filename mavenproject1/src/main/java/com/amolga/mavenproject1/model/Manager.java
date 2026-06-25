@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.amolga.mavenproject1.model;
+import java.util.*;
 
 /**
  *
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 public class Manager {
     private int id;
     private String password;
-    
     private Restaurant restaurant;
     
     public Manager(int id, String password, Restaurant restaurant){
@@ -41,7 +41,7 @@ public class Manager {
     }
     
     public void removeItem(MenuItem rmvItem){
-        ArrayList<MenuItem> menuAtual = this.restaurant.getMenu();
+        List<MenuItem> menuAtual = this.restaurant.getMenu();
         if (menuAtual.contains(rmvItem)) {
             menuAtual.remove(rmvItem);
             System.out.println("Item removido.");
@@ -50,26 +50,26 @@ public class Manager {
         }
     }
     
-public void consultItem(MenuItem consultItem){
-        if (this.restaurant.getMenu().contains(consultItem)){
-            System.out.println("Nome: " + consultItem.getName());
-            System.out.println("Preço: " + consultItem.getPrice());
-            System.out.println("Quantidade: " + consultItem.getQuantity());
-            
-            if(consultItem instanceof Food) {
-                Food f = (Food) consultItem;
-                System.out.println("Tipo: Food");
-                System.out.println("Descrição: " + f.getDescription());
-            } else if (consultItem instanceof Drink) {
-                Drink d = (Drink) consultItem; 
-                System.out.println("Tipo: Drink");
-                System.out.println("Fornecedor: " + d.getSupplier()); 
-            }
-            System.out.println();
-        } else {
-            System.out.println("Item não encontrado.");
-        }
-    }
+//public void consultItem(MenuItem consultItem){
+//        if (this.restaurant.getMenu().contains(consultItem)){
+//            System.out.println("Nome: " + consultItem.getName());
+//            System.out.println("Preço: " + consultItem.getPrice());
+//            System.out.println("Quantidade: " + consultItem.getQuantity());
+//            
+//            if(consultItem instanceof Food) {
+//                Food f = (Food) consultItem;
+//                System.out.println("Tipo: Food");
+//                System.out.println("Descrição: " + f.getDescription());
+//            } else if (consultItem instanceof Drink) {
+//                Drink d = (Drink) consultItem; 
+//                System.out.println("Tipo: Drink");
+//                System.out.println("Fornecedor: " + d.getSupplier()); 
+//            }
+//            System.out.println();
+//        } else {
+//            System.out.println("Item não encontrado.");
+//        }
+//    }
    
     public int getID() {
         return id;
@@ -94,4 +94,41 @@ public void consultItem(MenuItem consultItem){
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
+
+
+    private ArrayList<MenuItem> mainMenu;
+    public Manager(ArrayList<MenuItem> mainMenu){
+        this.mainMenu = mainMenu;
+    }
+    
+    public void registerFood(String name, double price, String description){
+        MenuItem newItem = new Food(name, price, description);
+        this.getMainMenu().add(newItem);
+    }
+    
+    public void registerDrink(String name, double price, String supplier){
+        MenuItem newItem = new Drink(name, price, supplier);
+        this.getMainMenu().add(newItem);
+    }
+    
+    
+    public void consultItem(String consultItem){
+        for(MenuItem item : getMainMenu()){
+            if(item.getName().equalsIgnoreCase(consultItem)){
+                System.out.println("Nome: " + item.getName());
+                System.out.println("Preco: " + item.getPrice());
+                return;
+            }
+        }
+        System.out.println("Esse item não está no menu");
+    }    
+
+    public ArrayList<MenuItem> getMainMenu() {
+        return mainMenu;
+    }
+
+    public void setMainMenu(ArrayList<MenuItem> mainMenu) {
+        this.mainMenu = mainMenu;
+    }
+
 }
