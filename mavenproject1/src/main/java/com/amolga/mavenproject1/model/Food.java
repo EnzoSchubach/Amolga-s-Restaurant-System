@@ -11,7 +11,7 @@ package com.amolga.mavenproject1.model;
 public class Food extends MenuItem{
     private String description;
     
-    Food(String name, double price, String description){
+    public Food(String name, double price, String description){
         super(name, price);
         this.setDescription(description);
     }

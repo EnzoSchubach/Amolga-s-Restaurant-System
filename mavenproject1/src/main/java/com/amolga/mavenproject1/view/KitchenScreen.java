@@ -4,6 +4,13 @@
  */
 package com.amolga.mavenproject1.view;
 
+import com.amolga.mavenproject1.model.Kitchen;
+import javax.swing.DefaultListModel;
+import com.amolga.mavenproject1.model.Order;
+import com.amolga.mavenproject1.model.MenuItem;
+import com.amolga.mavenproject1.model.Food;
+import java.util.Map;
+
 /**
  *
  * @author felipetinel
@@ -11,12 +18,18 @@ package com.amolga.mavenproject1.view;
 public class KitchenScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(KitchenScreen.class.getName());
-
+    private Kitchen kitchen;
+    private DefaultListModel <String> orderList = new DefaultListModel<>();
+    
     /**
      * Creates new form KitchenScreen
      */
     public KitchenScreen() {
+        
         initComponents();
+        kitchen = new Kitchen ();
+        ordersOpened.setModel(orderList);
+      
     }
 
     /**
@@ -29,34 +42,67 @@ public class KitchenScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        finishButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ordersOpened = new javax.swing.JList<>();
+        updateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        finishButton.setText("Finalizar");
+        finishButton.addActionListener(this::finishButtonActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel1.setText("Pedidos pendentes:");
+
+        jScrollPane1.setBorder(null);
+
+        ordersOpened.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jScrollPane1.setViewportView(ordersOpened);
+
+        updateButton.setText("Atualizar pedidos");
+        updateButton.addActionListener(this::updateButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(154, 154, 154))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+                        .addGap(33, 33, 33))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(finishButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(91, 91, 91))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(finishButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -69,6 +115,46 @@ public class KitchenScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
+
+        int selectedIndex = ordersOpened.getSelectedIndex();
+        
+        if (selectedIndex == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Não há pedido selecionado.");
+            return;          
+        }
+        
+        Order orderSelected = kitchen.getpendingOrders().get(selectedIndex);
+        
+        kitchen.deliverOrder(orderSelected);
+        
+        orderList.remove(selectedIndex);    
+        
+    }//GEN-LAST:event_finishButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        
+        orderList.clear();
+        
+        for (Order order : kitchen.getpendingOrders()) orderList.addElement(showOrder(order));
+            
+    }//GEN-LAST:event_updateButtonActionPerformed
+ 
+    String showOrder (Order order) {
+       
+        String orderOpened = "";
+        
+        orderOpened += order.getId() + " ";
+        
+        for (var item : order.getItems().entrySet()) {           
+            String itemName = item.getKey().getName();
+            Integer quantity = item.getValue();     
+            orderOpened = orderOpened + itemName + " x" + quantity + ", ";   
+        }
+        
+        return orderOpened;      
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -89,13 +175,17 @@ public class KitchenScreen extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new KitchenScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new KitchenScreen().setVisible(true));        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton finishButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> ordersOpened;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
