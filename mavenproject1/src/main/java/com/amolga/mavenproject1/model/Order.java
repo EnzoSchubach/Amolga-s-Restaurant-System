@@ -58,8 +58,8 @@ public class Order {
     }
     
     public void removeItem(MenuItem willDelete){
-        items.remove(willDelete);
-    }
+            items.remove(willDelete);
+        }
     
     public double calculateTotal() {
 
