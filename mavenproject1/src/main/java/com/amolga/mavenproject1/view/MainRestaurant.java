@@ -152,13 +152,15 @@ public class MainRestaurant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        InitialMenu loginScreen = new InitialMenu();
+        Login loginScreen = new Login();
         loginScreen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_loginActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        // Ainda não existe
+        MenuScreen screenMenu = new MenuScreen();
+        screenMenu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_menuActionPerformed
 
     /**
