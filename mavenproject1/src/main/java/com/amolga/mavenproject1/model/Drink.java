@@ -11,7 +11,7 @@ package com.amolga.mavenproject1.model;
 public class Drink extends MenuItem {
     private String supplier;
     
-    Drink(String name, double price, String supplier){
+    public Drink(String name, double price, String supplier){
         super(name, price);
         this.setSupplier(supplier);
     }
