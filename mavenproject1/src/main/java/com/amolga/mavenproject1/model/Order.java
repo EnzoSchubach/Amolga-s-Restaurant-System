@@ -5,27 +5,28 @@ import java.util.Map;
 
 public class Order {
 
+    static private int orderId = 1;
     private int id;
     private HashMap<MenuItem, Integer> items;
-    private String status;
+    private OrderStatus status;
     
-    public Order(int id, String status) {
+    public Order() {
 
-        this.id = id;
-        this.status = status;
+        this.id = orderId++;
         this.items = new HashMap<>();
-
+        this.status = OrderStatus.PENDING;
+    
     }
     
     public int getId(){
         return id;
     }
 
-    public HashMap<MenuItem, Integer> getItens(){
+    public HashMap<MenuItem, Integer> getItems(){
         return items;
     }
 
-    public String getStatus(){
+    public OrderStatus getStatus(){
         return status;
     }
 
@@ -36,21 +37,29 @@ public class Order {
     public void setItens(HashMap<MenuItem, Integer> items){
         this.items = items;
     }
-
-    public void setStatus(String status){
-        this.status = status;
+    
+    public void finishOrder(){ 
+        status = OrderStatus.FINISHED; 
     }
     
+    public void deliveredOrder() { 
+        status = OrderStatus.DELIVERED; 
+    }
+
+    public void pendingOrder() {
+        status = OrderStatus.PENDING;
+    }
+
     public void addItem(MenuItem newItem) {
 
-        int actualQuantity = items.getOrDefault(newItem, 1);
+        int actualQuantity = items.getOrDefault(newItem, 0);
         items.put(newItem, actualQuantity + 1);
     
     }
     
     public void removeItem(MenuItem willDelete){
-        items.remove(willDelete);
-    }
+            items.remove(willDelete);
+        }
     
     public double calculateTotal() {
 
@@ -64,8 +73,5 @@ public class Order {
         return total;
     }
     
-    public boolean finishOrder(){
-        status = "Finished";
-        return true;
-    }
+
 }
