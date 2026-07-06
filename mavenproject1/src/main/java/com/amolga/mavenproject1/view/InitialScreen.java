@@ -9,14 +9,14 @@ package com.amolga.mavenproject1.view;
  * @author sofia macedo
  */
 
-public class MainRestaurant extends javax.swing.JFrame {
+public class InitialScreen extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainRestaurant.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InitialScreen.class.getName());
 
     /**
      * Creates new form MainRestaurant
      */
-    public MainRestaurant() {
+    public InitialScreen() {
         initComponents();
     }
 
@@ -82,8 +82,8 @@ public class MainRestaurant extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(125, 125, 125)
-                .addComponent(restaurantText, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                .addGap(58, 58, 58)
+                .addComponent(restaurantText, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,9 +138,30 @@ public class MainRestaurant extends javax.swing.JFrame {
     }//GEN-LAST:event_loginActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        MenuScreen screenMenu = new MenuScreen();
-        screenMenu.setVisible(true);
-        this.dispose();
+        boolean loginUsuario = false;
+        
+        if(loginUsuario){
+            MenuScreen screenMenu = new MenuScreen();
+            screenMenu.setVisible(true);
+            this.dispose();
+        } else {
+            Object[] options = {"OK"};
+            int resposta = javax.swing.JOptionPane.showOptionDialog(this,
+                    "Faça o login antes de acessar o menu.",
+                    "Acesso somente com login",
+                    javax.swing.JOptionPane.DEFAULT_OPTION,
+                    javax.swing.JOptionPane.WARNING_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
+            
+            if (resposta == javax.swing.JOptionPane.OK_OPTION){
+                Login loginScreen = new Login();
+                loginScreen.setVisible(true);
+                this.dispose();
+            }
+        }   
     }//GEN-LAST:event_menuActionPerformed
 
     private void menuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMouseEntered
@@ -183,7 +204,7 @@ public class MainRestaurant extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainRestaurant().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new InitialScreen().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
