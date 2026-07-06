@@ -19,6 +19,29 @@ public class Register extends javax.swing.JFrame {
      */
     public Register() {
         initComponents();
+        textNameRegister.setForeground(java.awt.Color.GRAY);
+        textNameRegister.setText("Nome");
+
+        textEmailRegister.setForeground(java.awt.Color.GRAY);
+        textEmailRegister.setText("Email");
+
+        passwordFieldRegister.setEchoChar((char) 0);
+        passwordFieldRegister.setForeground(java.awt.Color.GRAY);
+        passwordFieldRegister.setText("Senha");
+
+        passwordConfirmation.setEchoChar((char) 0);
+        passwordConfirmation.setForeground(java.awt.Color.GRAY);
+        passwordConfirmation.setText("Confirmar Senha");
+
+        textCpfRegister.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+        new javax.swing.JFormattedTextField.AbstractFormatter() {
+            @Override
+            public Object stringToValue(String text) { return text; }
+            @Override
+            public String valueToString(Object value) { return value == null ? "" : value.toString(); }
+        }));
+       textCpfRegister.setText("CPF");
+       textCpfRegister.setForeground(java.awt.Color.GRAY);
     }
 
     /**
@@ -38,10 +61,10 @@ public class Register extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         textNameRegister = new javax.swing.JTextField();
-        textCpfRegister = new javax.swing.JTextField();
         textEmailRegister = new javax.swing.JTextField();
         passwordConfirmation = new javax.swing.JPasswordField();
         passwordFieldRegister = new javax.swing.JPasswordField();
+        textCpfRegister = new javax.swing.JFormattedTextField();
 
         jScrollPane1.setViewportView(textName);
 
@@ -77,17 +100,6 @@ public class Register extends javax.swing.JFrame {
         });
         textNameRegister.addActionListener(this::textNameRegisterActionPerformed);
 
-        textCpfRegister.setText("CPF");
-        textCpfRegister.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textCpfRegisterFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textCpfRegisterFocusLost(evt);
-            }
-        });
-        textCpfRegister.addActionListener(this::textCpfRegisterActionPerformed);
-
         textEmailRegister.setText("Email");
         textEmailRegister.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -99,7 +111,7 @@ public class Register extends javax.swing.JFrame {
         });
         textEmailRegister.addActionListener(this::textEmailRegisterActionPerformed);
 
-        passwordConfirmation.setText("Senha");
+        passwordConfirmation.setText("Confirmar Senha");
         passwordConfirmation.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordConfirmationFocusGained(evt);
@@ -120,6 +132,22 @@ public class Register extends javax.swing.JFrame {
         });
         passwordFieldRegister.addActionListener(this::passwordFieldRegisterActionPerformed);
 
+        try {
+            textCpfRegister.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        }
+        catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        textCpfRegister.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textCpfRegisterFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textCpfRegisterFocusLost(evt);
+            }
+        });
+        textCpfRegister.addActionListener(this::textCpfRegisterActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,10 +158,10 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registerButton)
                     .addComponent(textNameRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCpfRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textEmailRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordFieldRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordFieldRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCpfRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -145,7 +173,7 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(textNameRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textCpfRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(textEmailRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(passwordFieldRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,10 +186,6 @@ public class Register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textCpfRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCpfRegisterActionPerformed
 
     private void textEmailRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailRegisterActionPerformed
         // TODO add your handling code here:
@@ -188,7 +212,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldFocusLost
 
     private void passwordConfirmationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordConfirmationFocusGained
-        if (String.valueOf(passwordConfirmation.getPassword()).equals("Senha")) {
+        if (String.valueOf(passwordConfirmation.getPassword()).equals("Confirmar Senha")) {
             passwordConfirmation.setText("");
             passwordConfirmation.setForeground(java.awt.Color.BLACK); 
             passwordConfirmation.setEchoChar('•'); 
@@ -198,7 +222,7 @@ public class Register extends javax.swing.JFrame {
     private void passwordConfirmationFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordConfirmationFocusLost
         if (String.valueOf(passwordConfirmation.getPassword()).isEmpty()) {
             passwordConfirmation.setForeground(java.awt.Color.GRAY); 
-            passwordConfirmation.setText("Senha");
+            passwordConfirmation.setText("Confirmar Senha");
             passwordConfirmation.setEchoChar((char) 0); 
         }
     }//GEN-LAST:event_passwordConfirmationFocusLost
@@ -237,20 +261,6 @@ public class Register extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textNameRegisterFocusLost
 
-    private void textCpfRegisterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCpfRegisterFocusGained
-        if (textCpfRegister.getText().equals("CPF")) {
-        textCpfRegister.setText("");
-        textCpfRegister.setForeground(java.awt.Color.BLACK); 
-        }
-    }//GEN-LAST:event_textCpfRegisterFocusGained
-
-    private void textCpfRegisterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCpfRegisterFocusLost
-        if (textCpfRegister.getText().isEmpty()) {
-        textCpfRegister.setForeground(java.awt.Color.GRAY);
-        textCpfRegister.setText("CPF");
-        }
-    }//GEN-LAST:event_textCpfRegisterFocusLost
-
     private void textEmailRegisterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailRegisterFocusGained
         if (textEmailRegister.getText().equals("Email")) {
         textEmailRegister.setText("");
@@ -266,8 +276,68 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_textEmailRegisterFocusLost
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        String name = textNameRegister.getText().trim();
+        String email = textEmailRegister.getText().trim();
+        String cpf = textCpfRegister.getText().replaceAll("[^0-9]", "");
+        String password = String.valueOf(passwordFieldRegister.getPassword());
+        String pConfirmation = String.valueOf(passwordConfirmation.getPassword());
+
+        boolean nameEmpty = name.isEmpty() || name.equals("Nome");
+        boolean emailEmpty = email.isEmpty() || email.equals("Email");
+        boolean cpfEmpty = cpf.isEmpty();
+        boolean passwordEmpty = password.isEmpty() || password.equals("Senha");
+        boolean pConfirmationEmpty = pConfirmation.isEmpty() || pConfirmation.equals("Confirmar Senha");
+
+        if (nameEmpty || emailEmpty || cpfEmpty || passwordEmpty || pConfirmationEmpty) {
+            javax.swing.JOptionPane.showMessageDialog(this,"Preencha todos os campos antes de cadastrar.","Campos incompletos",javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (cpf.length() != 11) {
+            javax.swing.JOptionPane.showMessageDialog(this,"CPF inválido. Preencha todos os dígitos.","CPF incompleto",javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!password.equals(pConfirmation)) {
+            javax.swing.JOptionPane.showMessageDialog(this,"As senhas não coincidem.","Erro de confirmação",javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Client client = new Client(textNameRegister.getText(), textCpfRegister.getText(), textEmailRegister.getText(), passwordConfirmation.getText(), 0);
+        //voltar ao menu
     }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void textCpfRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCpfRegisterActionPerformed
+
+    private void textCpfRegisterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCpfRegisterFocusGained
+        if (textCpfRegister.getForeground().equals(java.awt.Color.GRAY)) {
+        textCpfRegister.setForeground(java.awt.Color.BLACK);
+        try {
+            javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
+            mask.setPlaceholderCharacter('_'); // <-- importante
+            textCpfRegister.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mask));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        textCpfRegister.setValue(null);
+        }
+    }//GEN-LAST:event_textCpfRegisterFocusGained
+
+    private void textCpfRegisterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCpfRegisterFocusLost
+        String apenasDigitos = textCpfRegister.getText().replaceAll("[^0-9]", "");
+        if (apenasDigitos.isEmpty()) {
+            textCpfRegister.setForeground(java.awt.Color.GRAY);
+            textCpfRegister.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                new javax.swing.JFormattedTextField.AbstractFormatter() {
+                    @Override
+                    public Object stringToValue(String text) { return text; }
+                    @Override
+                    public String valueToString(Object value) { return value == null ? "" : value.toString(); }
+                }));
+            textCpfRegister.setText("CPF");
+        }
+    }//GEN-LAST:event_textCpfRegisterFocusLost
 
     /**
      * @param args the command line arguments
@@ -302,7 +372,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JPasswordField passwordFieldRegister;
     private javax.swing.JButton registerButton;
-    private javax.swing.JTextField textCpfRegister;
+    private javax.swing.JFormattedTextField textCpfRegister;
     private javax.swing.JTextField textEmailRegister;
     private javax.swing.JTextPane textName;
     private javax.swing.JTextPane textName1;

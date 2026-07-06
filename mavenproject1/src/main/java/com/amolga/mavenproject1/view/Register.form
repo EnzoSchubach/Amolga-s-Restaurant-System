@@ -56,16 +56,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabel1" alignment="2" min="-2" pref="118" max="-2" attributes="0"/>
                   <Component id="registerButton" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="textNameRegister" alignment="2" min="-2" pref="193" max="-2" attributes="0"/>
-                  <Component id="textCpfRegister" alignment="2" min="-2" pref="193" max="-2" attributes="0"/>
                   <Component id="textEmailRegister" alignment="2" min="-2" pref="193" max="-2" attributes="0"/>
                   <Component id="passwordConfirmation" alignment="2" min="-2" pref="196" max="-2" attributes="0"/>
                   <Component id="passwordFieldRegister" alignment="2" min="-2" pref="196" max="-2" attributes="0"/>
+                  <Component id="textCpfRegister" alignment="2" min="-2" pref="193" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="94" max="32767" attributes="0"/>
           </Group>
@@ -80,7 +80,7 @@
               <Component id="textNameRegister" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="textCpfRegister" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="textEmailRegister" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="passwordFieldRegister" min="-2" max="-2" attributes="0"/>
@@ -121,16 +121,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textNameRegisterActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="textCpfRegister">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="CPF"/>
-      </Properties>
-      <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textCpfRegisterFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textCpfRegisterFocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCpfRegisterActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="textEmailRegister">
       <Properties>
         <Property name="text" type="java.lang.String" value="Email"/>
@@ -143,7 +133,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordConfirmation">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Senha"/>
+        <Property name="text" type="java.lang.String" value="Confirmar Senha"/>
       </Properties>
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwordConfirmationFocusGained"/>
@@ -159,6 +149,16 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwordFieldRegisterFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordFieldRegisterActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="textCpfRegister">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textCpfRegisterFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textCpfRegisterFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCpfRegisterActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try {&#xa;textCpfRegister.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;)));&#xa;}&#xa;catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

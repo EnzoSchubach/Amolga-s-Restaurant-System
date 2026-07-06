@@ -21,6 +21,27 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        
+        //lista de teste, nao sera utilizada na versão final
+        clientes = new ArrayList<>();
+        clientes.add(new Client("Ana Silva", "111.111.111-11", "ana.silva@email.com", "senha123", 50.0));
+        clientes.add(new Client("Bruno Costa", "222.222.222-22", "bruno.costa@email.com", "bruno456", 20.0));
+        clientes.add(new Client("Carla Souza", "333.333.333-33", "carla.souza@email.com", "carla789", 0.0));
+        clientes.add(new Client("Daniel Oliveira", "444.444.444-44", "daniel.oliveira@email.com", "dan1234", 100.0));
+        clientes.add(new Client("Eduarda Lima", "555.555.555-55", "eduarda.lima@email.com", "duda2024", 30.0));
+        clientes.add(new Client("Felipe Santos", "666.666.666-66", "felipe.santos@email.com", "felipe321", 0.0));
+        clientes.add(new Client("Gabriela Alves", "777.777.777-77", "gabriela.alves@email.com", "gabi_2024", 75.0));
+        clientes.add(new Client("Hugo Pereira", "888.888.888-88", "hugo.pereira@email.com", "hugo987", 10.0));
+        clientes.add(new Client("Isabela Rocha", "999.999.999-99", "isabela.rocha@email.com", "isa1234", 0.0));
+        clientes.add(new Client("João Martins", "000.000.000-00", "joao.martins@email.com", "joao555", 60.0));
+
+        textEmailLogin.setForeground(java.awt.Color.GRAY);
+        textEmailLogin.setText("Email");
+
+        passwordFieldLogin.setEchoChar((char) 0);
+        passwordFieldLogin.setForeground(java.awt.Color.GRAY);
+        passwordFieldLogin.setText("Senha");
+
     }
 
     /**
@@ -37,7 +58,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         enterButton = new javax.swing.JButton();
         passwordFieldLogin = new javax.swing.JPasswordField();
-        textNameLogin = new javax.swing.JTextField();
+        textEmailLogin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(640, 328));
@@ -46,7 +67,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("LOGIN");
+        jLabel1.setText("Login");
 
         newAccount.setText("Criar Conta");
         newAccount.addActionListener(this::newAccountActionPerformed);
@@ -68,13 +89,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        textNameLogin.setText("Nome");
-        textNameLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+        textEmailLogin.setText("Email");
+        textEmailLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                textNameLoginFocusGained(evt);
+                textEmailLoginFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                textNameLoginFocusLost(evt);
+                textEmailLoginFocusLost(evt);
             }
         });
 
@@ -83,23 +104,23 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(passwordFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textNameLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newAccount)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enterButton))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textNameLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(passwordFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -108,7 +129,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newAccount)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,34 +142,54 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_newAccountActionPerformed
 
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterButtonActionPerformed
-        String name = textNameLogin.getText();
+        String email = textEmailLogin.getText();
         String password = passwordFieldLogin.getText();
         Client logged = null;
         
+        boolean emailEmpty = email.isEmpty() || email.equals("Email");
+        boolean passwordEmpty = password.isEmpty() || password.equals("Senha");
+        boolean emailFound = false;
+        
+        if(emailEmpty || passwordEmpty){
+            javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Campos incompletos", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         for(Client c : clientes){
-            if(c.getName().equals(name)){
+            if(c.getEmail().equals(email)){
+                emailFound = true;
                 if(c.getPassword().equals(password)){
                     logged = c;
                     break;
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Senha incorreta", "Erro de Login", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
-                javax.swing.JOptionPane.showMessageDialog(this, "Senha incorreta", "Erro de Login", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
+        }
+        
+        if(!emailFound){
+            javax.swing.JOptionPane.showMessageDialog(this,"Email incorreto","Erro de login",javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (logged != null) {
+            // voltar pro menu
         }
     }//GEN-LAST:event_enterButtonActionPerformed
 
-    private void textNameLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNameLoginFocusGained
-        if (textNameLogin.getText().equals("Nome")) {
-        textNameLogin.setText("");
-        textNameLogin.setForeground(java.awt.Color.BLACK); 
+    private void textEmailLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailLoginFocusGained
+        if (textEmailLogin.getText().equals("Email")) {
+        textEmailLogin.setText("");
+        textEmailLogin.setForeground(java.awt.Color.BLACK); 
         }
-    }//GEN-LAST:event_textNameLoginFocusGained
+    }//GEN-LAST:event_textEmailLoginFocusGained
 
-    private void textNameLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNameLoginFocusLost
-        if (textNameLogin.getText().isEmpty()) {
-        textNameLogin.setForeground(java.awt.Color.GRAY); 
-        textNameLogin.setText("Nome");
+    private void textEmailLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailLoginFocusLost
+        if (textEmailLogin.getText().isEmpty()) {
+        textEmailLogin.setForeground(java.awt.Color.GRAY); 
+        textEmailLogin.setText("Email");
         }
-    }//GEN-LAST:event_textNameLoginFocusLost
+    }//GEN-LAST:event_textEmailLoginFocusLost
 
     private void passwordFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldLoginFocusGained
         if (String.valueOf(passwordFieldLogin.getPassword()).equals("Senha")) {
@@ -197,6 +238,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton newAccount;
     private javax.swing.JPasswordField passwordFieldLogin;
-    private javax.swing.JTextField textNameLogin;
+    private javax.swing.JTextField textEmailLogin;
     // End of variables declaration//GEN-END:variables
 }
