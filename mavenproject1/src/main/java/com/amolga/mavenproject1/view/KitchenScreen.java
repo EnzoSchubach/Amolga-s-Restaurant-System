@@ -29,6 +29,7 @@ public class KitchenScreen extends javax.swing.JFrame {
     public KitchenScreen() {
         
         initComponents();
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         kitchen = new Kitchen ();
         ordersOpened.setModel(orderList);
         database = new Database();
