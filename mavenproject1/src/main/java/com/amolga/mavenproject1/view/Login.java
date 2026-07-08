@@ -36,11 +36,11 @@ public class Login extends javax.swing.JFrame {
         clientes.add(new Client("João Martins", "000.000.000-00", "joao.martins@email.com", "joao555", 60.0));
 
         textEmailLogin.setForeground(java.awt.Color.GRAY);
-        textEmailLogin.setText("Email");
+        textEmailLogin.setText("exemplo@gmail.com");
 
         passwordFieldLogin.setEchoChar((char) 0);
         passwordFieldLogin.setForeground(java.awt.Color.GRAY);
-        passwordFieldLogin.setText("Senha");
+        passwordFieldLogin.setText("*****");
 
     }
 
@@ -53,33 +53,23 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        passwordFieldLogin = new javax.swing.JPasswordField();
+        textEmailLogin = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         newAccount = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         enterButton = new javax.swing.JButton();
-        passwordFieldLogin = new javax.swing.JPasswordField();
-        textEmailLogin = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(640, 328));
-        setResizable(false);
         setSize(new java.awt.Dimension(640, 360));
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Login");
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
-        newAccount.setText("Criar Conta");
-        newAccount.addActionListener(this::newAccountActionPerformed);
-
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Não tem uma conta ainda?");
-
-        enterButton.setText("Entrar");
-        enterButton.addActionListener(this::enterButtonActionPerformed);
-
-        passwordFieldLogin.setText("Senha");
+        passwordFieldLogin.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        passwordFieldLogin.setText("*****");
         passwordFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordFieldLoginFocusGained(evt);
@@ -88,8 +78,10 @@ public class Login extends javax.swing.JFrame {
                 passwordFieldLoginFocusLost(evt);
             }
         });
+        passwordFieldLogin.addActionListener(this::passwordFieldLoginActionPerformed);
 
-        textEmailLogin.setText("Email");
+        textEmailLogin.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        textEmailLogin.setText("exemplo@gmail.com");
         textEmailLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textEmailLoginFocusGained(evt);
@@ -98,58 +90,101 @@ public class Login extends javax.swing.JFrame {
                 textEmailLoginFocusLost(evt);
             }
         });
+        textEmailLogin.addActionListener(this::textEmailLoginActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Login");
+
+        newAccount.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        newAccount.setText("Criar Conta");
+        newAccount.addActionListener(this::newAccountActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Não tem uma conta ainda?");
+
+        enterButton.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        enterButton.setText("Entrar");
+        enterButton.addActionListener(this::enterButtonActionPerformed);
+
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Senha");
+
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Email");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(401, 401, 401)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(enterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(327, 327, 327))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(549, 549, 549)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(enterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(passwordFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newAccount)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enterButton))
-                .addContainerGap(78, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(passwordFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(enterButton)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newAccount)
-                .addContainerGap(27, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAccountActionPerformed
-        Register registerScreen = new Register(); 
-        registerScreen.setVisible(true); // Show the register screen
-        this.dispose(); // Close the current login screen
-    }//GEN-LAST:event_newAccountActionPerformed
-
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterButtonActionPerformed
         String email = textEmailLogin.getText();
         String password = passwordFieldLogin.getText();
         Client logged = null;
-        
-        boolean emailEmpty = email.isEmpty() || email.equals("Email");
-        boolean passwordEmpty = password.isEmpty() || password.equals("Senha");
+
+        boolean emailEmpty = email.isEmpty() || email.equals("exemplo@gmail.com");
+        boolean passwordEmpty = password.isEmpty() || password.equals("*****");
         boolean emailFound = false;
-        
+
         if(emailEmpty || passwordEmpty){
             javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Campos incompletos", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
@@ -166,46 +201,60 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         if(!emailFound){
             javax.swing.JOptionPane.showMessageDialog(this,"Email incorreto","Erro de login",javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (logged != null) {
             // voltar pro menu
         }
     }//GEN-LAST:event_enterButtonActionPerformed
 
-    private void textEmailLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailLoginFocusGained
-        if (textEmailLogin.getText().equals("Email")) {
-        textEmailLogin.setText("");
-        textEmailLogin.setForeground(java.awt.Color.BLACK); 
-        }
-    }//GEN-LAST:event_textEmailLoginFocusGained
+    private void newAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAccountActionPerformed
+        Register registerScreen = new Register();
+        registerScreen.setVisible(true); // Show the register screen
+        this.dispose(); // Close the current login screen
+    }//GEN-LAST:event_newAccountActionPerformed
 
     private void textEmailLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailLoginFocusLost
         if (textEmailLogin.getText().isEmpty()) {
-        textEmailLogin.setForeground(java.awt.Color.GRAY); 
-        textEmailLogin.setText("Email");
+            textEmailLogin.setForeground(java.awt.Color.GRAY);
+            textEmailLogin.setText("exemplo@gmail.com");
         }
     }//GEN-LAST:event_textEmailLoginFocusLost
 
-    private void passwordFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldLoginFocusGained
-        if (String.valueOf(passwordFieldLogin.getPassword()).equals("Senha")) {
-            passwordFieldLogin.setText("");
-            passwordFieldLogin.setForeground(java.awt.Color.BLACK); 
-            passwordFieldLogin.setEchoChar('•'); 
+    private void textEmailLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailLoginFocusGained
+        if (textEmailLogin.getText().equals("exemplo@gmail.com")) {
+            textEmailLogin.setText("");
+            textEmailLogin.setForeground(java.awt.Color.BLACK);
         }
-    }//GEN-LAST:event_passwordFieldLoginFocusGained
+    }//GEN-LAST:event_textEmailLoginFocusGained
 
     private void passwordFieldLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldLoginFocusLost
         if (String.valueOf(passwordFieldLogin.getPassword()).isEmpty()) {
-            passwordFieldLogin.setForeground(java.awt.Color.GRAY); 
-            passwordFieldLogin.setText("Senha");
-            passwordFieldLogin.setEchoChar((char) 0); 
+            passwordFieldLogin.setForeground(java.awt.Color.GRAY);
+            passwordFieldLogin.setText("*****");
+            passwordFieldLogin.setEchoChar((char) 0);
         }
     }//GEN-LAST:event_passwordFieldLoginFocusLost
+
+    private void passwordFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldLoginFocusGained
+        if (String.valueOf(passwordFieldLogin.getPassword()).equals("*****")) {
+            passwordFieldLogin.setText("");
+            passwordFieldLogin.setForeground(java.awt.Color.BLACK);
+            passwordFieldLogin.setEchoChar('•');
+        }
+    }//GEN-LAST:event_passwordFieldLoginFocusGained
+
+    private void textEmailLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textEmailLoginActionPerformed
+
+    private void passwordFieldLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +285,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton enterButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton newAccount;
     private javax.swing.JPasswordField passwordFieldLogin;
     private javax.swing.JTextField textEmailLogin;
