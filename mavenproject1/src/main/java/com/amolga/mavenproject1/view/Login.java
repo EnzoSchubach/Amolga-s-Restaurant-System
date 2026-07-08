@@ -23,7 +23,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         
-        // Inicializa clientes de teste no Database se estiver vazio
         if (Database.getClients().size() <= 3) {
             Database.addClients(new Client("Ana Silva", "111.111.111-11", "ana.silva@email.com", "senha123", 50.0));
             Database.addClients(new Client("Bruno Costa", "222.222.222-22", "bruno.costa@email.com", "bruno456", 20.0));

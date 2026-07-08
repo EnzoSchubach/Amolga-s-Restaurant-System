@@ -115,7 +115,7 @@ public class PaymentScreen extends javax.swing.JFrame {
         pnlButtons.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         pnlLeft.add(pnlButtons, BorderLayout.SOUTH);
 
-        btnCalculate = new JButton("Calcular Total");
+        btnCalculate = new JButton("Gerar Recibo");
         pnlButtons.add(btnCalculate);
 
         btnProcess = new JButton("Confirmar Pagamento");
@@ -147,6 +147,7 @@ public class PaymentScreen extends javax.swing.JFrame {
                 cbInstallments.setSelectedIndex(0);
                 tfFee.setText("2.0");
                 calculateTotals();
+                generateReceipt();
             }
         });
 
@@ -156,6 +157,7 @@ public class PaymentScreen extends javax.swing.JFrame {
                 cbInstallments.setEnabled(true);
                 tfFee.setText("3.0");
                 calculateTotals();
+                generateReceipt();
             }
         });
 
@@ -163,13 +165,14 @@ public class PaymentScreen extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 calculateTotals();
+                generateReceipt();
             }
         });
 
         btnCalculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                calculateTotals();
+                generateReceipt();
             }
         });
 
@@ -213,6 +216,7 @@ public class PaymentScreen extends javax.swing.JFrame {
         taOrderDetails.setText(sb.toString());
 
         calculateTotals();
+        generateReceipt();
     }
 
     private void calculateTotals() {
@@ -254,6 +258,64 @@ public class PaymentScreen extends javax.swing.JFrame {
         }
     }
 
+    private void generateReceipt() {
+        if (bill == null) return;
+        Client c = bill.getClient();
+        Table t = bill.getTable();
+        ArrayList<Order> ordersList = bill.getOrders();
+        if (ordersList == null || ordersList.isEmpty()) {
+            taReceipt.setText("Nenhum pedido na conta.");
+            return;
+        }
+
+        double feePercent = 0.0;
+        try {
+            feePercent = Double.parseDouble(tfFee.getText().trim()) / 100.0;
+        } catch (NumberFormatException ex) {
+            return;
+        }
+
+        PaymentMethod pm;
+        boolean isInstallments = cbInstallments.isEnabled() && cbInstallments.getSelectedIndex() > 0;
+        if (rbDebit.isSelected()) {
+            pm = new Debit(feePercent);
+        } else {
+            pm = new Credit(isInstallments, feePercent);
+        }
+
+        double subtotal = 0;
+        for (Order o : ordersList) {
+            subtotal += o.calculateTotal();
+        }
+        double base = Math.max(0, subtotal - (c != null ? c.getBonus() : 0.0));
+        double finalVal = pm.calcValue(base);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("======= RECIBO DE PAGAMENTO =======\n");
+        if (t != null) {
+            sb.append("Mesa: ").append(t.getNumber()).append("\n");
+        }
+        if (c != null) {
+            sb.append("Cliente: ").append(c.getName()).append("\n");
+        }
+        sb.append("Método: ").append(pm.getMethodName()).append("\n");
+        if (pm instanceof Credit) {
+            int parts = cbInstallments.getSelectedIndex() + 1;
+            sb.append("Opção: ").append(isInstallments ? parts + " parcelas" : "À vista").append("\n");
+        }
+        sb.append("Subtotal: R$ ").append(String.format("%.2f", subtotal)).append("\n");
+        if (c != null) {
+            sb.append("Desconto: R$ ").append(String.format("%.2f", c.getBonus())).append("\n");
+        }
+        sb.append("Total Pago: R$ ").append(String.format("%.2f", finalVal)).append("\n");
+        if (pm instanceof Credit && isInstallments) {
+            int parts = cbInstallments.getSelectedIndex() + 1;
+            sb.append("Valor da Parcela: R$ ").append(String.format("%.2f", finalVal / parts)).append("\n");
+        }
+        sb.append("===================================\n");
+        taReceipt.setText(sb.toString());
+    }
+
     private void processPayment() {
         if (bill == null) return;
         Table t = bill.getTable();
@@ -290,38 +352,6 @@ public class PaymentScreen extends javax.swing.JFrame {
             ordersList.get(i).finishOrder();
         }
 
-        double subtotal = 0;
-        for (Order o : ordersList) {
-            subtotal += o.calculateTotal();
-        }
-        double base = Math.max(0, subtotal - c.getBonus());
-        double finalVal = pm.calcValue(base);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("======= RECIBO DE PAGAMENTO =======\n");
-        if (t != null) {
-            sb.append("Mesa: ").append(t.getNumber()).append("\n");
-        }
-        if (c != null) {
-            sb.append("Cliente: ").append(c.getName()).append("\n");
-        }
-        sb.append("Método: ").append(pm.getMethodName()).append("\n");
-        if (pm instanceof Credit) {
-            int parts = cbInstallments.getSelectedIndex() + 1;
-            sb.append("Opção: ").append(isInstallments ? parts + " parcelas" : "À vista").append("\n");
-        }
-        sb.append("Subtotal: R$ ").append(String.format("%.2f", subtotal)).append("\n");
-        if (c != null) {
-            sb.append("Desconto: R$ ").append(String.format("%.2f", c.getBonus())).append("\n");
-        }
-        sb.append("Total Pago: R$ ").append(String.format("%.2f", finalVal)).append("\n");
-        if (pm instanceof Credit && isInstallments) {
-            int parts = cbInstallments.getSelectedIndex() + 1;
-            sb.append("Valor da Parcela: R$ ").append(String.format("%.2f", finalVal / parts)).append("\n");
-        }
-        sb.append("===================================\n");
-        taReceipt.setText(sb.toString());
-
         if (c != null && c.getBonus() > 0) {
             c.setBonus(0.0);
         }
@@ -333,6 +363,7 @@ public class PaymentScreen extends javax.swing.JFrame {
         Database.removeActiveBill(bill);
 
         JOptionPane.showMessageDialog(this, "Pagamento realizado com sucesso! Mesa desocupada.");
+        this.dispose();
     }
 
     public static void main(String args[]) {
