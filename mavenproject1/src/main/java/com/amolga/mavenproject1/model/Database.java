@@ -48,9 +48,6 @@ public class Database {
         items.add(new Drink("Milkshake Ovomaltine", 18.00, "Sorvete artesanal com Ovomaltine crocante"));
         items.add(new Drink("Soda Italiana Limão", 9.00, "Xarope Monin e água com gás"));
 
-        // // Histórico de pedidos de teste (Instanciando vazio, pois não exige argumentos)
-        orders.add(new Order());
-        orders.add(new Order());
     }
 
     public static void addClients(Client client) {
