@@ -147,7 +147,6 @@ public class PaymentScreen extends javax.swing.JFrame {
                 cbInstallments.setSelectedIndex(0);
                 tfFee.setText("2.0");
                 calculateTotals();
-                generateReceipt();
             }
         });
 
@@ -157,7 +156,6 @@ public class PaymentScreen extends javax.swing.JFrame {
                 cbInstallments.setEnabled(true);
                 tfFee.setText("3.0");
                 calculateTotals();
-                generateReceipt();
             }
         });
 
@@ -165,7 +163,6 @@ public class PaymentScreen extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 calculateTotals();
-                generateReceipt();
             }
         });
 
@@ -216,7 +213,6 @@ public class PaymentScreen extends javax.swing.JFrame {
         taOrderDetails.setText(sb.toString());
 
         calculateTotals();
-        generateReceipt();
     }
 
     private void calculateTotals() {
