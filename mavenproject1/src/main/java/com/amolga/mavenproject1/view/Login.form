@@ -26,7 +26,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -49,27 +53,27 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="401" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabel1" alignment="2" min="-2" pref="291" max="-2" attributes="0"/>
-                              <Component id="textEmailLogin" alignment="2" min="-2" pref="289" max="-2" attributes="0"/>
-                              <Component id="passwordFieldLogin" alignment="2" min="-2" pref="290" max="-2" attributes="0"/>
-                              <Component id="enterButton" alignment="2" min="-2" pref="160" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="2" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="newAccount" alignment="2" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="2" max="32767" attributes="0"/>
+                              <Component id="textEmailLogin" alignment="2" pref="943" max="32767" attributes="0"/>
+                              <Component id="passwordFieldLogin" alignment="2" pref="943" max="32767" attributes="0"/>
+                              <Component id="enterButton" alignment="2" pref="943" max="32767" attributes="0"/>
+                              <Component id="jLabel2" alignment="2" pref="943" max="32767" attributes="0"/>
+                              <Component id="newAccount" alignment="2" pref="943" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" pref="67" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" pref="72" max="-2" attributes="0"/>
+                              <Component id="jLabel4" pref="458" max="32767" attributes="0"/>
+                              <Component id="jLabel3" pref="458" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="549" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

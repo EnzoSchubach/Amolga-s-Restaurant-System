@@ -122,6 +122,7 @@ public class MenuScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cardápio");
 
         jButton1.setBackground(new java.awt.Color(0, 153, 0));
