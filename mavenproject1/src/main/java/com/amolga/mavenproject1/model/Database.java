@@ -9,19 +9,19 @@ import java.util.ArrayList;
  *
  * @author sofia macedo
  */
+
 public class Database {
-    private static final ArrayList<String> clients = new ArrayList<>();
+    private static final ArrayList<Client> clients = new ArrayList<>();
     private static final ArrayList<MenuItem> items = new ArrayList<>();
-    private static final ArrayList<String> orders = new ArrayList<>();
+    private static final ArrayList<Order> orders = new ArrayList<>();
     
     static {
         // Clientes de teste
-        clients.add("amolga@email.com");
-        clients.add("cliente@amolga.com");
-        clients.add("admin@burger.com");
+        clients.add(new Client("Amolga Administrador", "amolga@email.com", "senha123", "(11) 99999-9999", 0.0));
+        clients.add(new Client("Cliente Padrão", "cliente@amolga.com", "123456", "(11) 88888-8888", 50.0));
+        clients.add(new Client("Admin Burger", "admin@burger.com", "admin123", "(11) 77777-7777", 150.50));
 
         // Itens do cardápio de teste
-        
         // Burgers (Hambúrgueres)
         items.add(new Food("Amolga Classic", 24.90, "Pão, blend de 150g, queijo prato, alface, tomate e maionese artesanal."));
         items.add(new Food("Double Bacon", 32.90, "Pão, dois blends de 120g, cheddar duplo, bacon crocante e molho barbecue."));
@@ -48,24 +48,28 @@ public class Database {
         items.add(new Drink("Milkshake Ovomaltine", 18.00, "Sorvete artesanal com Ovomaltine crocante"));
         items.add(new Drink("Soda Italiana Limão", 9.00, "Xarope Monin e água com gás"));
 
-        // Histórico de pedidos de teste
-        orders.add("Pedido #001 - 1x Amolga Burger Tradicional (sofia@email.com)");
-        orders.add("Pedido #002 - 2x Batata Frita Suprema (admin@burger.com)");
+        // // Histórico de pedidos de teste (Instanciando vazio, pois não exige argumentos)
+        orders.add(new Order());
+        orders.add(new Order());
     }
 
-    public static void addClients(String client) {
+    public static void addClients(Client client) {
         clients.add(client);
     }
 
-    public static ArrayList<String> getClients() {
+    public static ArrayList<Client> getClients() {
         return clients;
     }
     
     public static boolean checkClients(String emailClient) {
-        return clients.contains(emailClient);
+        for (Client c : clients) {
+            if (c.getEmail().equalsIgnoreCase(emailClient)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-  
     public static void addPItems(MenuItem item) {
         items.add(item);
     }
@@ -78,13 +82,11 @@ public class Database {
         return items;
     }
 
-    
-    public static void addOrders(String order) {
+    public static void addOrders(Order order) {
         orders.add(order);
     }
 
-    public static ArrayList<String> getOrders() {
+    public static ArrayList<Order> getOrders() {
         return orders;
     }
 }
-
