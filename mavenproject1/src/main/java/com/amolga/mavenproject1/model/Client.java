@@ -11,6 +11,11 @@ import java.util.*;
 public class Client {
     private String name, cpf, email, password;
     private double bonus;
+    private ArrayList<Order> orders = new ArrayList<>();
+    
+    public ArrayList<Order> getOrders() {
+        return this.orders;
+    }
     
     public String getName(){
         return this.name;

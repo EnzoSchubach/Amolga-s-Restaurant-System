@@ -208,10 +208,10 @@ public class InitialScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_loginActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        boolean loginUsuario = false;
+        boolean loginUsuario = this.loggedClient != null;
         
         if(loginUsuario){
-            MenuScreen screenMenu = new MenuScreen();
+            MenuScreen screenMenu = new MenuScreen(this.loggedClient);
             screenMenu.setVisible(true);
             this.dispose();
         } else {
