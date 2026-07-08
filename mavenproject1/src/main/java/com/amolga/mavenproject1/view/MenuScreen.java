@@ -74,9 +74,6 @@ public class MenuScreen extends javax.swing.JFrame {
         menuLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(50, 0, 50, 0));
         getContentPane().add(menuLabel, java.awt.BorderLayout.NORTH);
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cardápio");
         menuList.setAutoscrolls(false);
         jScrollPane1.setViewportView(menuList);
 
