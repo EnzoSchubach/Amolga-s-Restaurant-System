@@ -67,7 +67,7 @@
         </Component>
       </SubComponents>
     </Container>
-<<<<<<< HEAD
+
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -105,7 +105,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
-=======
+
     <Container class="javax.swing.JPanel" name="jPanelBottom">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -188,6 +188,6 @@
         </Component>
       </SubComponents>
     </Container>
->>>>>>> dev
+
   </SubComponents>
 </Form>
