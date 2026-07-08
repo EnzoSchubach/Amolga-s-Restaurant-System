@@ -30,7 +30,7 @@ public class MenuItemPanel extends javax.swing.JPanel {
         this();
         this.item = item;
         if (item != null) {
-            menuItemLabel.setText(item.getName());
+            menuItemLabel.setText(item.getName() + " - R$ " + String.format("%.2f", item.getPrice()));
             if (item instanceof Food food) {
                 supplierLabel.setText("");
                 descriptionLabel.setText("<html><div style='text-align:center'>" + food.getDescription() + "</div></html>");

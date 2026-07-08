@@ -41,9 +41,10 @@ public class Manager {
     }
     
     public void removeItem(MenuItem rmvItem){
-        List<MenuItem> menuAtual = this.restaurant.getMenu();
-        if (menuAtual.contains(rmvItem)) {
+        List<MenuItem> menuAtual = (this.restaurant != null) ? this.restaurant.getMenu() : this.mainMenu;
+        if (menuAtual != null && menuAtual.contains(rmvItem)) {
             menuAtual.remove(rmvItem);
+            Database.removePItems(rmvItem);
             System.out.println("Item removido.");
         } else {
             System.out.println("Item não encontrado.");
@@ -104,11 +105,13 @@ public class Manager {
     public void registerFood(String name, double price, String description){
         MenuItem newItem = new Food(name, price, description);
         this.getMainMenu().add(newItem);
+        Database.addPItems(newItem);
     }
     
     public void registerDrink(String name, double price, String supplier){
         MenuItem newItem = new Drink(name, price, supplier);
         this.getMainMenu().add(newItem);
+        Database.addPItems(newItem);
     }
     
     

@@ -11,11 +11,9 @@ public class Order {
     private OrderStatus status;
     
     public Order() {
-
         this.id = orderId++;
         this.items = new HashMap<>();
         this.status = OrderStatus.PENDING;
-    
     }
     
     public int getId(){
@@ -23,6 +21,14 @@ public class Order {
     }
 
     public HashMap<MenuItem, Integer> getItems(){
+        return items;
+    }
+
+    /**
+     * MÉTODO CORRETIVO: Este método serve como um apelido para resolver o erro
+     * de compilação nas linhas 199 e 200 da PaymentScreen.java.
+     */
+    public HashMap<MenuItem, Integer> getItens(){
         return items;
     }
 
@@ -34,7 +40,7 @@ public class Order {
         this.id = id;
     }
 
-    public void setItens(HashMap<MenuItem, Integer> items){
+    public void setItems(HashMap<MenuItem, Integer> items){
         this.items = items;
     }
     
@@ -51,27 +57,20 @@ public class Order {
     }
 
     public void addItem(MenuItem newItem) {
-
         int actualQuantity = items.getOrDefault(newItem, 0);
         items.put(newItem, actualQuantity + 1);
-    
     }
     
     public void removeItem(MenuItem willDelete){
-            items.remove(willDelete);
-        }
+        items.remove(willDelete);
+    }
     
     public double calculateTotal() {
-
         double total = 0;
-
         for (Map.Entry<MenuItem, Integer> item : items.entrySet()) {
             double itemPrice = item.getKey().getPrice();
             total += itemPrice * item.getValue();
         }
-
         return total;
     }
-    
-
 }
