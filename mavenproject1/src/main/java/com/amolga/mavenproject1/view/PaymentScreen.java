@@ -11,6 +11,7 @@ public class PaymentScreen extends javax.swing.JFrame {
 
     private final Bill bill;
 
+
     private JLabel lblTableName;
     private JLabel lblClientName;
     private JRadioButton rbDebit;
