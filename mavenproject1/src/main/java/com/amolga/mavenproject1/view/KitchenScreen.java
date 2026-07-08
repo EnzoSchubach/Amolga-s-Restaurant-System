@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import com.amolga.mavenproject1.model.Order;
 import com.amolga.mavenproject1.model.MenuItem;
 import com.amolga.mavenproject1.model.Food;
+import com.amolga.mavenproject1.model.Database;
 import java.util.Map;
 
 /**
@@ -19,6 +20,7 @@ public class KitchenScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(KitchenScreen.class.getName());
     private Kitchen kitchen;
+    private Database database;
     private DefaultListModel <String> orderList = new DefaultListModel<>();
     
     /**
@@ -29,7 +31,8 @@ public class KitchenScreen extends javax.swing.JFrame {
         initComponents();
         kitchen = new Kitchen ();
         ordersOpened.setModel(orderList);
-      
+        database = new Database();
+        
     }
 
     /**
@@ -136,17 +139,21 @@ public class KitchenScreen extends javax.swing.JFrame {
         
         orderList.clear();
         
+        for (Order order : database.getOrders()) kitchen.receiveOrder(order);
+        
         for (Order order : kitchen.getpendingOrders()) orderList.addElement(showOrder(order));
-            
+               
     }//GEN-LAST:event_updateButtonActionPerformed
  
     String showOrder (Order order) {
        
         String orderOpened = "";
         
-        orderOpened += order.getId() + " ";
+        orderOpened += order.getId() + " " + order.getClass().getName() + " " + order.getTable().getNumber() + " ";
         
-        for (var item : order.getItems().entrySet()) {           
+        
+        for (var item : order.getItems().entrySet()) { 
+            
             String itemName = item.getKey().getName();
             Integer quantity = item.getValue();     
             orderOpened = orderOpened + itemName + " x" + quantity + ", ";   
