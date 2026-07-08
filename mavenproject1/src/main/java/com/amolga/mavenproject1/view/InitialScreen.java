@@ -5,6 +5,11 @@
 package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Client;
+import com.amolga.mavenproject1.model.Database;
+import com.amolga.mavenproject1.model.Bill;
+import com.amolga.mavenproject1.model.Table;
+import com.amolga.mavenproject1.model.TableStatus;
+import java.util.ArrayList;
 
 /**
  *
@@ -208,12 +213,72 @@ public class InitialScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_loginActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        boolean loginUsuario = false;
+        boolean loginUsuario = (this.loggedClient != null);
         
-        if(loginUsuario){
-            MenuScreen screenMenu = new MenuScreen();
-            screenMenu.setVisible(true);
-            this.dispose();
+        if (loginUsuario) {
+            Bill activeBill = Database.getActiveBillByClient(loggedClient);
+            if (activeBill == null) {
+                // Seleção de mesa
+                ArrayList<String> freeTableOptions = new ArrayList<>();
+                for (Table t : Database.getTables()) {
+                    if (t.getStatus() == TableStatus.FREE) {
+                        freeTableOptions.add("Mesa " + t.getNumber());
+                    }
+                }
+                if (freeTableOptions.isEmpty()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Desculpe, todas as mesas estão ocupadas no momento.", "Sem Mesas Disponíveis", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                String selectedStr = (String) javax.swing.JOptionPane.showInputDialog(
+                    this,
+                    "Selecione uma mesa disponível:",
+                    "Seleção de Mesa",
+                    javax.swing.JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    freeTableOptions.toArray(),
+                    freeTableOptions.get(0)
+                );
+                if (selectedStr == null) return; // Cancelado
+                int tableNum = Integer.parseInt(selectedStr.replace("Mesa ", ""));
+                Table table = Database.occupyTable(tableNum);
+                if (table != null) {
+                    Bill bill = new Bill();
+                    bill.setClient(loggedClient);
+                    bill.setTable(table);
+                    Database.addActiveBill(bill);
+                    javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "Mesa " + tableNum + " ocupada com sucesso!\nSua senha temporária de acesso é: " + table.getCode() + "\nPor favor, guarde esta senha para o pagamento.",
+                        "Mesa Reservada",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE
+                    );
+                    
+                    MenuScreen screenMenu = new MenuScreen(bill);
+                    screenMenu.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                // Já possui mesa ativa
+                Object[] options = {"Fazer Novo Pedido", "Pedir Conta / Pagar", "Voltar"};
+                int choice = javax.swing.JOptionPane.showOptionDialog(
+                    this,
+                    "Mesa " + activeBill.getTable().getNumber() + " ativa.\nO que deseja fazer?",
+                    "Menu da Mesa",
+                    javax.swing.JOptionPane.YES_NO_CANCEL_OPTION,
+                    javax.swing.JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+                );
+                if (choice == javax.swing.JOptionPane.YES_OPTION) {
+                    MenuScreen screenMenu = new MenuScreen(activeBill);
+                    screenMenu.setVisible(true);
+                    this.dispose();
+                } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
+                    PaymentScreen paymentScreen = new PaymentScreen(activeBill);
+                    paymentScreen.setVisible(true);
+                }
+            }
         } else {
             Object[] options = {"OK"};
             int resposta = javax.swing.JOptionPane.showOptionDialog(this,

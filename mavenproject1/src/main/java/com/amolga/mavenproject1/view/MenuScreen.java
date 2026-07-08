@@ -4,6 +4,7 @@ import com.amolga.mavenproject1.model.MenuItem;
 import com.amolga.mavenproject1.model.Food;
 import com.amolga.mavenproject1.model.Drink;
 import com.amolga.mavenproject1.model.Database;
+import com.amolga.mavenproject1.model.Bill;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -16,9 +17,9 @@ public class MenuScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuScreen.class.getName());
     private final ArrayList<MenuItem> menuItems = new ArrayList<>();
+    private final ArrayList<MenuItemPanel> panels = new ArrayList<>();
+    private Bill activeBill;
 
-    
-    
     /**
      * Creates new form MenuScreen
      */
@@ -30,13 +31,21 @@ public class MenuScreen extends javax.swing.JFrame {
         populateMenu();
     }
 
+    public MenuScreen(Bill bill) {
+        this();
+        this.activeBill = bill;
+    }
+
     public void populateMenu() {
+        panels.clear();
         javax.swing.JPanel gridPanel = new javax.swing.JPanel();
         // 2 columns, vertical/horizontal gap of 15px
         gridPanel.setLayout(new java.awt.GridLayout(0, 2, 15, 15));
         
         for (MenuItem item : menuItems) {
-            gridPanel.add(new MenuItemPanel(item));
+            MenuItemPanel panel = new MenuItemPanel(item);
+            panels.add(panel);
+            gridPanel.add(panel);
         }
         
         jScrollPane1.setViewportView(gridPanel);
@@ -115,13 +124,45 @@ public class MenuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Pedido confirmado com sucesso! Ele foi adicionado à sua lista de pedidos.", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        populateMenu();
+        com.amolga.mavenproject1.model.Order order = new com.amolga.mavenproject1.model.Order();
+        boolean hasItems = false;
+        for (MenuItemPanel panel : panels) {
+            int qty = panel.getQuantity();
+            if (qty > 0) {
+                hasItems = true;
+                for (int i = 0; i < qty; i++) {
+                    order.addItem(panel.getItem());
+                }
+            }
+        }
+
+        if (!hasItems) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecione pelo menos um item.", "Pedido Vazio", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (activeBill != null) {
+            activeBill.getOrders().add(order);
+            Database.addOrders(order);
+            new com.amolga.mavenproject1.model.Kitchen().receiveOrder(order);
+            javax.swing.JOptionPane.showMessageDialog(this, "Pedido confirmado com sucesso! Ele foi enviado para a cozinha.", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            InitialScreen mainScreen = new InitialScreen(activeBill.getClient());
+            mainScreen.setVisible(true);
+            this.dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Pedido confirmado (Sem mesa ativa para o cliente).", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            InitialScreen mainScreen = new InitialScreen(null);
+            mainScreen.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Pedido cancelado e limpo com sucesso.", "Cancelado", javax.swing.JOptionPane.WARNING_MESSAGE);
-        populateMenu();
+        javax.swing.JOptionPane.showMessageDialog(this, "Pedido cancelado.", "Cancelado", javax.swing.JOptionPane.WARNING_MESSAGE);
+        InitialScreen mainScreen = new InitialScreen(activeBill != null ? activeBill.getClient() : null);
+        mainScreen.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed

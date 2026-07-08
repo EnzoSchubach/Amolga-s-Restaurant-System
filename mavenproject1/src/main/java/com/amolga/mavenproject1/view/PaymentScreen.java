@@ -326,6 +326,12 @@ public class PaymentScreen extends javax.swing.JFrame {
             c.setBonus(0.0);
         }
 
+        if (t != null) {
+            t.freeTable();
+        }
+
+        Database.removeActiveBill(bill);
+
         JOptionPane.showMessageDialog(this, "Pagamento realizado com sucesso! Mesa desocupada.");
     }
 

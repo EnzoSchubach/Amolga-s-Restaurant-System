@@ -4,6 +4,7 @@
  */
 package com.amolga.mavenproject1.model;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -14,8 +15,15 @@ public class Database {
     private static final ArrayList<Client> clients = new ArrayList<>();
     private static final ArrayList<MenuItem> items = new ArrayList<>();
     private static final ArrayList<Order> orders = new ArrayList<>();
+    private static final ArrayList<Table> tables = new ArrayList<>();
+    private static final ArrayList<Bill> activeBills = new ArrayList<>();
     
     static {
+        // Inicializa as 13 mesas do restaurante
+        for (int i = 1; i <= 13; i++) {
+            tables.add(new Table(i));
+        }
+
         // Clientes de teste
         clients.add(new Client("Amolga Administrador", "amolga@email.com", "senha123", "(11) 99999-9999", 0.0));
         clients.add(new Client("Cliente Padrão", "cliente@amolga.com", "123456", "(11) 88888-8888", 50.0));
@@ -88,5 +96,83 @@ public class Database {
 
     public static ArrayList<Order> getOrders() {
         return orders;
+    }
+
+    public static ArrayList<Table> getTables() {
+        return tables;
+    }
+
+    public static Table getTableByNumber(int number) {
+        for (Table t : tables) {
+            if (t.getNumber() == number) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public static String generateUniqueTableCode() {
+        Random random = new Random();
+        String newCode;
+        boolean exists;
+        do {
+            newCode = String.format("%04d", random.nextInt(10000));
+            exists = false;
+            for (Table t : tables) {
+                if (t.getStatus() == TableStatus.OCCUPIED && newCode.equals(t.getCode())) {
+                    exists = true;
+                    break;
+                }
+            }
+        } while (exists);
+        return newCode;
+    }
+
+    public static Table occupyTable(int number) {
+        Table t = getTableByNumber(number);
+        if (t != null && t.getStatus() == TableStatus.FREE) {
+            String uniqueCode = generateUniqueTableCode();
+            t.occupyTable(uniqueCode);
+            return t;
+        }
+        return null;
+    }
+
+    public static void freeTable(int number) {
+        Table t = getTableByNumber(number);
+        if (t != null) {
+            t.freeTable();
+        }
+    }
+
+    public static ArrayList<Bill> getActiveBills() {
+        return activeBills;
+    }
+
+    public static void addActiveBill(Bill bill) {
+        activeBills.add(bill);
+    }
+
+    public static void removeActiveBill(Bill bill) {
+        activeBills.remove(bill);
+    }
+
+    public static Bill getActiveBillByTable(int tableNumber) {
+        for (Bill b : activeBills) {
+            if (b.getTable() != null && b.getTable().getNumber() == tableNumber) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public static Bill getActiveBillByClient(Client client) {
+        if (client == null) return null;
+        for (Bill b : activeBills) {
+            if (b.getClient() != null && client.getEmail().equalsIgnoreCase(b.getClient().getEmail())) {
+                return b;
+            }
+        }
+        return null;
     }
 }
