@@ -25,6 +25,7 @@ public class Register extends javax.swing.JFrame {
     public Register() {
         initComponents();
         this.clients.addAll(Database.getClients());
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
         textNameRegister.setForeground(java.awt.Color.GRAY);
         textNameRegister.setText("Nome");
