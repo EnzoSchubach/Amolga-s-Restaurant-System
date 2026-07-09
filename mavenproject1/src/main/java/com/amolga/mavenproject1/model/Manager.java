@@ -50,27 +50,6 @@ public class Manager {
             System.out.println("Item não encontrado.");
         }
     }
-    
-//public void consultItem(MenuItem consultItem){
-//        if (this.restaurant.getMenu().contains(consultItem)){
-//            System.out.println("Nome: " + consultItem.getName());
-//            System.out.println("Preço: " + consultItem.getPrice());
-//            System.out.println("Quantidade: " + consultItem.getQuantity());
-//            
-//            if(consultItem instanceof Food) {
-//                Food f = (Food) consultItem;
-//                System.out.println("Tipo: Food");
-//                System.out.println("Descrição: " + f.getDescription());
-//            } else if (consultItem instanceof Drink) {
-//                Drink d = (Drink) consultItem; 
-//                System.out.println("Tipo: Drink");
-//                System.out.println("Fornecedor: " + d.getSupplier()); 
-//            }
-//            System.out.println();
-//        } else {
-//            System.out.println("Item não encontrado.");
-//        }
-//    }
    
     public int getID() {
         return id;
