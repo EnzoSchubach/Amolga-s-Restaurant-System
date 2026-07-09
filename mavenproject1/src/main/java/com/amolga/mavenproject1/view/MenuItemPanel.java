@@ -48,11 +48,9 @@ public class MenuItemPanel extends javax.swing.JPanel {
         java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
         
-        // Background
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
         
-        // Border
         g2.setColor(new java.awt.Color(220, 220, 220));
         g2.setStroke(new java.awt.BasicStroke(1.5f));
         g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);

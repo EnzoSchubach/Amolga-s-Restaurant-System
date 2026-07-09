@@ -335,7 +335,7 @@ public class PaymentScreen extends javax.swing.JFrame {
         Table t = bill.getTable();
         Client c = bill.getClient();
         ArrayList<Order> ordersList = bill.getOrders();
-        
+
         if (ordersList == null || ordersList.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nenhum pedido na conta.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
@@ -357,24 +357,39 @@ public class PaymentScreen extends javax.swing.JFrame {
             pm = new Credit(isInstallments, feePercent);
         }
 
-        Order primaryOrder = ordersList.get(0);
-        Payment payment = new Payment(primaryOrder, c, t, pm);
-        payment.processPayment();
+        double subtotal = 0;
+        for (Order o : ordersList) {
+            subtotal += o.calculateTotal();
+        }
 
-        for (int i = 1; i < ordersList.size(); i++) {
-            ordersList.get(i).finishOrder();
+        double bonus = c != null ? c.getBonus() : 0.0;
+        double base = Math.max(0, subtotal - bonus);
+        double finalTotal = pm.calcValue(base);
+
+        for (Order o : ordersList) {
+            o.finishOrder();
+        }
+
+        if (t != null) {
+            t.freeTable();
+        }
+
+        if (c != null) {
+            c.setBonus(finalTotal * 0.10);
         }
 
         Database.removeActiveBill(bill);
 
         double newBonus = c != null ? c.getBonus() : 0.0;
         JOptionPane.showMessageDialog(this,
-            "Pagamento realizado com sucesso!\nBônus acumulado: R$ " + String.format("%.2f", newBonus));
+            "Pagamento realizado com sucesso!\nBônus acumulado: R$ " + String.format("%.2f", newBonus).replace(".", ","));
 
         InitialScreen mainScreen = new InitialScreen(c);
         mainScreen.setVisible(true);
         this.dispose();
     }
+
+
 
     public static void main(String args[]) {
         try {
