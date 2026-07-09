@@ -126,10 +126,6 @@ public class MenuScreen extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, adicione itens ao pedido antes de confirmar.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        if (loggedClient != null) {
-            loggedClient.getOrders().add(currentOrder);
-        }
         
         com.amolga.mavenproject1.model.Bill bill = new com.amolga.mavenproject1.model.Bill();
         bill.setClient(loggedClient);
