@@ -339,7 +339,7 @@ public class InitialScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_loginMouseExited
 
     private void kitchenActionPerformed(java.awt.event.ActionEvent evt) {
-        KitchenScreen kitchenScreen = new KitchenScreen();
+        KitchenScreen kitchenScreen = new KitchenScreen(loggedClient);
         kitchenScreen.setVisible(true);
         this.dispose();
     }

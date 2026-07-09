@@ -9,7 +9,10 @@ import javax.swing.DefaultListModel;
 import com.amolga.mavenproject1.model.Order;
 import com.amolga.mavenproject1.model.MenuItem;
 import com.amolga.mavenproject1.model.Food;
+import com.amolga.mavenproject1.model.Client;
 import com.amolga.mavenproject1.model.Database;
+import com.amolga.mavenproject1.model.OrderStatus;
+import com.amolga.mavenproject1.view.InitialScreen;
 import java.util.Map;
 
 /**
@@ -21,18 +24,22 @@ public class KitchenScreen extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(KitchenScreen.class.getName());
     private Kitchen kitchen;
     private Database database;
+    private Client logged;
     private DefaultListModel <String> orderList = new DefaultListModel<>();
     
     /**
      * Creates new form KitchenScreen
      */
-    public KitchenScreen() {
+    public KitchenScreen(Client logged) {
         
         initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         kitchen = new Kitchen ();
         ordersOpened.setModel(orderList);
         database = new Database();
+        
+        this.logged = logged;
+        
         
     }
 
@@ -51,6 +58,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersOpened = new javax.swing.JList<>();
         updateButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,17 +76,23 @@ public class KitchenScreen extends javax.swing.JFrame {
         updateButton.setText("Atualizar pedidos");
         updateButton.addActionListener(this::updateButtonActionPerformed);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                         .addGap(33, 33, 33))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -89,10 +103,15 @@ public class KitchenScreen extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -140,17 +159,32 @@ public class KitchenScreen extends javax.swing.JFrame {
         
         orderList.clear();
         
-        for (Order order : database.getOrders()) kitchen.receiveOrder(order);
+        for (Order order : database.getOrders()) {
+            if (!kitchen.getpendingOrders().contains(order) && order.getStatus() == OrderStatus.PENDING) {
+                kitchen.receiveOrder(order);
+            }
+        }
+            
         
         for (Order order : kitchen.getpendingOrders()) orderList.addElement(showOrder(order));
                
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        InitialScreen telaAnterior = new InitialScreen(logged);
+
+        telaAnterior.setVisible(true);
+    
+        this.dispose();  
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
  
     String showOrder (Order order) {
        
         String orderOpened = "";
         
-        orderOpened += order.getId() + " " + order.getClass().getName() + " " + order.getTable().getNumber() + " ";
+        orderOpened += order.getId() + " " + "Mesa" + order.getTable().getNumber() + " " + order.getClient().getName() + " " + " ";
         
         
         for (var item : order.getItems().entrySet()) { 
@@ -185,11 +219,12 @@ public class KitchenScreen extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new KitchenScreen().setVisible(true));        
+        java.awt.EventQueue.invokeLater(() -> new KitchenScreen(new com.amolga.mavenproject1.model.Client()).setVisible(true));        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton finishButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
