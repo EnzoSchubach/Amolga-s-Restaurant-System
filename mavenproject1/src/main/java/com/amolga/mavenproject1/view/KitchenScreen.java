@@ -58,7 +58,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersOpened = new javax.swing.JList<>();
         updateButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +76,8 @@ public class KitchenScreen extends javax.swing.JFrame {
         updateButton.setText("Atualizar pedidos");
         updateButton.addActionListener(this::updateButtonActionPerformed);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        returnButton.setText("Voltar");
+        returnButton.addActionListener(this::returnButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,11 +85,11 @@ public class KitchenScreen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(returnButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                         .addGap(33, 33, 33))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
@@ -111,7 +111,7 @@ public class KitchenScreen extends javax.swing.JFrame {
                             .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -170,7 +170,7 @@ public class KitchenScreen extends javax.swing.JFrame {
                
     }//GEN-LAST:event_updateButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         
         InitialScreen telaAnterior = new InitialScreen(logged);
 
@@ -178,7 +178,7 @@ public class KitchenScreen extends javax.swing.JFrame {
     
         this.dispose();  
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_returnButtonActionPerformed
  
     String showOrder (Order order) {
        
@@ -224,11 +224,11 @@ public class KitchenScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton finishButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> ordersOpened;
+    private javax.swing.JButton returnButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
