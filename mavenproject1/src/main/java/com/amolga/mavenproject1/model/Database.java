@@ -37,7 +37,6 @@ public class Database {
         clients.add(new Client("João Martins", "000.000.000-00", "joao.martins@email.com", "joao555", 60.0));
 
         // Itens do cardápio de teste
-        // Burgers (Hambúrgueres)
         items.add(new Food("Amolga Classic", 24.90, "Pão, blend de 150g, queijo prato, alface, tomate e maionese artesanal."));
         items.add(new Food("Double Bacon", 32.90, "Pão, dois blends de 120g, cheddar duplo, bacon crocante e molho barbecue."));
         items.add(new Food("Cheddar Monster", 29.90, "Pão brioche, blend de 180g, muito cheddar cremoso e cebola caramelizada."));
@@ -46,13 +45,11 @@ public class Database {
         items.add(new Food("Smash Simples", 18.00, "Pão, blend smash de 80g, queijo cheddar e ketchup da casa."));
         items.add(new Food("Smash Duplo", 23.00, "Pão, dois blends smash de 80g, queijo cheddar duplo e molho especial."));
         
-        // Acompanhamentos (Sides)
-        items.add(new Food("Batata Frita", 12.00, "Batata frita tradicional bem crocante."));
-        items.add(new Food("Batata Suprema", 19.90, "Batata frita coberta com cheddar cremoso e bacon picado."));
+        items.add(new Food("Patinhas Fritas", 12.00, "Batata frita tradicional bem crocante."));
+        items.add(new Food("Patinhas Supremas", 19.90, "Batata frita coberta com cheddar cremoso e bacon picado."));
         items.add(new Food("Onion Rings", 14.00, "Anéis de cebola empanados e fritos, acompanha molho barbecue."));
         items.add(new Food("Nuggets (8 un)", 15.00, "Nuggets de frango crocantes, acompanha molho tártaro."));
         
-        // Bebidas (Drinks)
         items.add(new Drink("Coca-Cola Lata", 6.00, "Coca-Cola Brasil"));
         items.add(new Drink("Guaraná Lata", 6.00, "Ambev"));
         items.add(new Drink("Suco de Laranja", 8.50, "Natural da Fruta"));
@@ -61,7 +58,8 @@ public class Database {
         items.add(new Drink("Cerveja Heineken", 10.00, "Heineken"));
         items.add(new Drink("Milkshake Chocolate", 16.00, "Sorvete artesanal de chocolate"));
         items.add(new Drink("Milkshake Ovomaltine", 18.00, "Sorvete artesanal com Ovomaltine crocante"));
-        items.add(new Drink("Soda Italiana Limão", 9.00, "Xarope Monin e água com gás"));
+        items.add(new Drink("Amolga Shake", 18.00, "Sorvete artesanal de frutas"));
+        items.add(new Drink("Refresco de Amora", 9.00, "Xarope Monin de amora e água com gás"));
 
         // // Histórico de pedidos de teste (Instanciando vazio, pois não exige argumentos)
         orders.add(new Order());

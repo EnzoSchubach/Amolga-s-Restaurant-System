@@ -361,22 +361,18 @@ public class PaymentScreen extends javax.swing.JFrame {
         Payment payment = new Payment(primaryOrder, c, t, pm);
         payment.processPayment();
 
-        // Finish all other orders in the bill as well
         for (int i = 1; i < ordersList.size(); i++) {
             ordersList.get(i).finishOrder();
         }
 
-        if (c != null && c.getBonus() > 0) {
-            c.setBonus(0.0);
-        }
-
-        if (t != null) {
-            t.freeTable();
-        }
-
         Database.removeActiveBill(bill);
 
-        JOptionPane.showMessageDialog(this, "Pagamento realizado com sucesso! Mesa desocupada.");
+        double newBonus = c != null ? c.getBonus() : 0.0;
+        JOptionPane.showMessageDialog(this,
+            "Pagamento realizado com sucesso!\nBônus acumulado: R$ " + String.format("%.2f", newBonus));
+
+        InitialScreen mainScreen = new InitialScreen(c);
+        mainScreen.setVisible(true);
         this.dispose();
     }
 

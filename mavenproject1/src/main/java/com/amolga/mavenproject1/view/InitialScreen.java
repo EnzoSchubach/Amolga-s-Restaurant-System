@@ -27,6 +27,7 @@ public class InitialScreen extends javax.swing.JFrame {
     public InitialScreen(Client logged) {
         this.loggedClient = logged;
         initComponents();
+        ((javax.swing.GroupLayout) jPanel2.getLayout()).setHonorsVisibility(bonusLabel, false);
         
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
@@ -45,6 +46,7 @@ public class InitialScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         restaurantText = new javax.swing.JLabel();
+        bonusLabel = new javax.swing.JLabel();
         menu = new javax.swing.JButton();
         kitchen = new javax.swing.JButton();
         login = new javax.swing.JButton();
@@ -60,6 +62,10 @@ public class InitialScreen extends javax.swing.JFrame {
         restaurantText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         restaurantText.setText("Amolga's An? Burguer");
         restaurantText.setToolTipText("");
+
+        bonusLabel.setFont(new java.awt.Font("Liberation Sans", 0, 22)); // NOI18N
+        bonusLabel.setForeground(new java.awt.Color(153, 0, 0));
+        bonusLabel.setText("Bônus: R$ 0,00");
 
         menu.setFont(new java.awt.Font("Liberation Sans", 0, 22)); // NOI18N
         menu.setText("Menu");
@@ -115,8 +121,10 @@ public class InitialScreen extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(restaurantText, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(204, 204, 204)
+                .addComponent(restaurantText, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(bonusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,7 +144,8 @@ public class InitialScreen extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bonusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(16, 16, 16))
         );
 
@@ -207,6 +216,10 @@ public class InitialScreen extends javax.swing.JFrame {
     private void configLoggedScreen() {
         if (this.loggedClient != null) {
             login.setText("Sair");
+            bonusLabel.setText("Bônus: R$ " + String.format("%.2f", loggedClient.getBonus()).replace(".", ","));
+            bonusLabel.setVisible(true);
+        } else {
+            bonusLabel.setVisible(false);
         }
     }
     
@@ -379,6 +392,7 @@ public class InitialScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bonusLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
