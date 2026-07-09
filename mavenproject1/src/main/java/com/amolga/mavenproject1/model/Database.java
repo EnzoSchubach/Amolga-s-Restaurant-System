@@ -61,9 +61,6 @@ public class Database {
         items.add(new Drink("Amolga Shake", 18.00, "Sorvete artesanal de frutas"));
         items.add(new Drink("Refresco de Amora", 9.00, "Xarope Monin de amora e água com gás"));
 
-        // // Histórico de pedidos de teste (Instanciando vazio, pois não exige argumentos)
-        orders.add(new Order());
-        orders.add(new Order());
     }
 
     public static void addClients(Client client) {
