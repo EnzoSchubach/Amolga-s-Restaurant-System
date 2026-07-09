@@ -20,15 +20,21 @@ public class Payment {
     public void processPayment() {
         double total = order.calculateTotal();
         
-        if (client.getBonus() > 0) {
-            total -= client.getBonus();
+        if (client != null && client.getBonus() > 0) {
+            total = Math.max(0, total - client.getBonus());
         }
 
         // Calculates the final total by applying the specific fee of the payment method
         double finalTotal = paymentMethod.calcValue(total);
 
         order.finishOrder();
-        table.freeTable();
+        if (table != null) {
+            table.freeTable();
+        }
+
+        if (client != null) {
+            client.setBonus(finalTotal * 0.10);
+        }
 
         displayReceipt(finalTotal);
     }
