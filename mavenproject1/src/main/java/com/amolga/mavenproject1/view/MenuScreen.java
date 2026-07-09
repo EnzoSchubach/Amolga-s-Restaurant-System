@@ -74,7 +74,6 @@ public class MenuScreen extends javax.swing.JFrame {
         rmvButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         menuLabel.setFont(new java.awt.Font("Liberation Sans", 0, 48)); // NOI18N
         menuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,9 +86,7 @@ public class MenuScreen extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-
-
-        jPanelBottom.setLayout(new java.awt.FlowLayout(1, 30, 10));
+        jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 10));
 
         confirmButton.setBackground(new java.awt.Color(0, 153, 0));
         confirmButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,7 +196,6 @@ public class MenuScreen extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton createButton;
-
     private javax.swing.JPanel jPanelBottom;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel menuLabel;

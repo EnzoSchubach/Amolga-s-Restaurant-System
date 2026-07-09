@@ -40,6 +40,7 @@ public class InitialScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         restaurantText = new javax.swing.JLabel();
         menu = new javax.swing.JButton();
+        kitchen = new javax.swing.JButton();
         login = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -70,6 +71,22 @@ public class InitialScreen extends javax.swing.JFrame {
         });
         menu.addActionListener(this::menuActionPerformed);
 
+        kitchen.setFont(new java.awt.Font("Liberation Sans", 0, 22)); // NOI18N
+        kitchen.setText("Cozinha");
+        kitchen.setBorder(null);
+        kitchen.setBorderPainted(false);
+        kitchen.setContentAreaFilled(false);
+        kitchen.setFocusPainted(false);
+        kitchen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                kitchenMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                kitchenMouseExited(evt);
+            }
+        });
+        kitchen.addActionListener(this::kitchenActionPerformed);
+
         login.setFont(new java.awt.Font("Liberation Sans", 0, 22)); // NOI18N
         login.setText("Login");
         login.setBorder(null);
@@ -92,9 +109,11 @@ public class InitialScreen extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(restaurantText, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(restaurantText, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(204, 204, 204)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -110,7 +129,8 @@ public class InitialScreen extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(16, 16, 16))
         );
 
@@ -252,6 +272,21 @@ public class InitialScreen extends javax.swing.JFrame {
         login.setContentAreaFilled(false);
     }//GEN-LAST:event_loginMouseExited
 
+    private void kitchenActionPerformed(java.awt.event.ActionEvent evt) {
+        KitchenScreen kitchenScreen = new KitchenScreen();
+        kitchenScreen.setVisible(true);
+        this.dispose();
+    }
+
+    private void kitchenMouseEntered(java.awt.event.MouseEvent evt) {
+        kitchen.setBackground(new java.awt.Color(255, 255, 255));
+        kitchen.setContentAreaFilled(true);
+    }
+
+    private void kitchenMouseExited(java.awt.event.MouseEvent evt) {
+        kitchen.setContentAreaFilled(false);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -283,6 +318,7 @@ public class InitialScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton kitchen;
     private javax.swing.JButton login;
     private javax.swing.JButton menu;
     private javax.swing.JLabel restaurantText;
