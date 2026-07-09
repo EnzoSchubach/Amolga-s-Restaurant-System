@@ -32,6 +32,7 @@ public class PaymentScreen extends javax.swing.JFrame {
     public PaymentScreen(Bill bill) {
         this.bill = bill;
         initComponents();
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         if (bill != null) {
             lblTableName.setText(bill.getTable() != null ? "Mesa " + bill.getTable().getNumber() : "N/A");
             lblClientName.setText(bill.getClient() != null ? bill.getClient().getName() : "N/A");
@@ -46,10 +47,27 @@ public class PaymentScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        JPanel pnlTitle = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        JLabel lblTitle = new JLabel("TELA DE PAGAMENTO");
+        JPanel pnlTitle = new JPanel(new BorderLayout());
+        pnlTitle.setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
+        
+        JLabel lblTitle = new JLabel("TELA DE PAGAMENTO", SwingConstants.CENTER);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 18));
-        pnlTitle.add(lblTitle);
+        pnlTitle.add(lblTitle, BorderLayout.CENTER);
+
+        JButton btnBack = new JButton("Voltar");
+        btnBack.setBackground(new Color(153, 0, 0));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setFocusPainted(false);
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InitialScreen mainScreen = new InitialScreen(bill != null ? bill.getClient() : null);
+                mainScreen.setVisible(true);
+                dispose();
+            }
+        });
+        pnlTitle.add(btnBack, BorderLayout.EAST);
+        
         add(pnlTitle, BorderLayout.NORTH);
 
         JPanel pnlCenter = new JPanel(new GridLayout(1, 2, 15, 15));
