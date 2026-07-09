@@ -23,19 +23,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        if (Database.getClients().isEmpty()) {
-            Database.addClients(new Client("Ana Silva", "111.111.111-11", "ana.silva@email.com", "senha123", 50.0));
-            Database.addClients(new Client("Bruno Costa", "222.222.222-22", "bruno.costa@email.com", "bruno456", 20.0));
-            Database.addClients(new Client("Carla Souza", "333.333.333-33", "carla.souza@email.com", "carla789", 0.0));
-            Database.addClients(new Client("Daniel Oliveira", "444.444.444-44", "daniel.oliveira@email.com", "dan1234", 100.0));
-            Database.addClients(new Client("Eduarda Lima", "555.555.555-55", "eduarda.lima@email.com", "duda2024", 30.0));
-            Database.addClients(new Client("Felipe Santos", "666.666.666-66", "felipe.santos@email.com", "felipe321", 0.0));
-            Database.addClients(new Client("Gabriela Alves", "777.777.777-77", "gabriela.alves@email.com", "gabi_2024", 75.0));
-            Database.addClients(new Client("Hugo Pereira", "888.888.888-88", "hugo.pereira@email.com", "hugo987", 10.0));
-            Database.addClients(new Client("Isabela Rocha", "999.999.999-99", "isabela.rocha@email.com", "isa1234", 0.0));
-            Database.addClients(new Client("João Martins", "000.000.000-00", "joao.martins@email.com", "joao555", 60.0));
-        }
-        this.clients.clear();
         this.clients.addAll(Database.getClients());
         textEmailLogin.setForeground(java.awt.Color.GRAY);
         textEmailLogin.setText("exemplo@gmail.com");
