@@ -32,6 +32,7 @@ public class PaymentScreen extends javax.swing.JFrame {
     public PaymentScreen(Bill bill) {
         this.bill = bill;
         initComponents();
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         if (bill != null) {
             lblTableName.setText(bill.getTable() != null ? "Mesa " + bill.getTable().getNumber() : "N/A");
             lblClientName.setText(bill.getClient() != null ? bill.getClient().getName() : "N/A");
