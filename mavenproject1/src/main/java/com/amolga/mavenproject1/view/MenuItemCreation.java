@@ -20,6 +20,9 @@ public class MenuItemCreation extends javax.swing.JFrame {
      */
     public MenuItemCreation() {
         initComponents();
+        
+        this.getContentPane().setBackground(new java.awt.Color(255, 153, 255));
+        
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         // Default select Food
         foodOption.setSelected(true);

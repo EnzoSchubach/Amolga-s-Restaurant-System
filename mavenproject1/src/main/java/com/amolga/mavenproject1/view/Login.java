@@ -31,6 +31,8 @@ public class Login extends javax.swing.JFrame {
         passwordFieldLogin.setEchoChar((char) 0);
         passwordFieldLogin.setForeground(java.awt.Color.GRAY);
         passwordFieldLogin.setText("*****");
+        
+        this.setLocationRelativeTo(null);
 
     }
 

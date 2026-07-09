@@ -33,6 +33,10 @@ public class KitchenScreen extends javax.swing.JFrame {
     public KitchenScreen(Client logged) {
         
         initComponents();
+        
+        setBackground(new java.awt.Color(255, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         kitchen = new Kitchen ();
         ordersOpened.setModel(orderList);
@@ -61,6 +65,7 @@ public class KitchenScreen extends javax.swing.JFrame {
         returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
 
         finishButton.setText("Finalizar");
         finishButton.addActionListener(this::finishButtonActionPerformed);

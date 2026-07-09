@@ -53,6 +53,8 @@ public class InitialScreen extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(255, 153, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 

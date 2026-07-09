@@ -47,6 +47,7 @@ public class MenuScreen extends javax.swing.JFrame {
         
         this.currentOrder = new com.amolga.mavenproject1.model.Order(loggedClient, currentTable);
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color(255, 153, 255));
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         this.menuItems.addAll(Database.getItems());
