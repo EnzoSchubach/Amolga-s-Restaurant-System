@@ -5,6 +5,8 @@
 package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Client;
+import com.amolga.mavenproject1.model.Database;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +16,7 @@ import com.amolga.mavenproject1.model.Client;
 public class InitialScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InitialScreen.class.getName());
+    ArrayList<Client>  clients;
     private Client loggedClient;
     /**
      * Creates new form MainRestaurant
@@ -208,9 +211,7 @@ public class InitialScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_loginActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        boolean loginUsuario = false;
-        
-        if(loginUsuario){
+        if (this.loggedClient != null) {
             MenuScreen screenMenu = new MenuScreen();
             screenMenu.setVisible(true);
             this.dispose();

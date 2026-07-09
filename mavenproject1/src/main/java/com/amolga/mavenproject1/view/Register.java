@@ -6,6 +6,9 @@ package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Client;
 
+import com.amolga.mavenproject1.model.Database;
+import java.util.ArrayList;
+
 /**
  *
  * @author leticia
@@ -13,12 +16,15 @@ import com.amolga.mavenproject1.model.Client;
 public class Register extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Register.class.getName());
+    private final ArrayList<Client> clients = new ArrayList<>();
 
     /**
      * Creates new form Register
      */
     public Register() {
         initComponents();
+        this.clients.addAll(Database.getClients());
+        
         textNameRegister.setForeground(java.awt.Color.GRAY);
         textNameRegister.setText("Nome");
 
@@ -375,8 +381,12 @@ public class Register extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this,"As senhas não coincidem.","Erro de confirmação",javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Client client = new Client(textNameRegister.getText(), textCpfRegister.getText(), textEmailRegister.getText(), passwordConfirmation.getText(), 0);
-        //voltar ao menu
+        
+        Client client = new Client(name, cpf, email, password, 0);
+        Database.addClients(client);
+        InitialScreen menu = new InitialScreen(client);
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void textCpfRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfRegisterActionPerformed
