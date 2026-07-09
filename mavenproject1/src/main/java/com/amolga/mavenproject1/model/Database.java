@@ -4,6 +4,7 @@
  */
 package com.amolga.mavenproject1.model;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -14,12 +15,26 @@ public class Database {
     private static final ArrayList<Client> clients = new ArrayList<>();
     private static final ArrayList<MenuItem> items = new ArrayList<>();
     private static final ArrayList<Order> orders = new ArrayList<>();
+    private static final ArrayList<Table> tables = new ArrayList<>();
+    private static final ArrayList<Bill> activeBills = new ArrayList<>();
     
     static {
+        // Inicializa as 13 mesas do restaurante
+        for (int i = 1; i <= 13; i++) {
+            tables.add(new Table(i));
+        }
+
         // Clientes de teste
-        clients.add(new Client("Amolga Administrador", "amolga@email.com", "senha123", "(11) 99999-9999", 0.0));
-        clients.add(new Client("Cliente Padrão", "cliente@amolga.com", "123456", "(11) 88888-8888", 50.0));
-        clients.add(new Client("Admin Burger", "admin@burger.com", "admin123", "(11) 77777-7777", 150.50));
+        clients.add(new Client("Ana Silva", "111.111.111-11", "ana.silva@email.com", "senha123", 50.0));
+        clients.add(new Client("Bruno Costa", "222.222.222-22", "bruno.costa@email.com", "bruno456", 20.0));
+        clients.add(new Client("Carla Souza", "333.333.333-33", "carla.souza@email.com", "carla789", 0.0));
+        clients.add(new Client("Daniel Oliveira", "444.444.444-44", "daniel.oliveira@email.com", "dan1234", 100.0));
+        clients.add(new Client("Eduarda Lima", "555.555.555-55", "eduarda.lima@email.com", "duda2024", 30.0));
+        clients.add(new Client("Felipe Santos", "666.666.666-66", "felipe.santos@email.com", "felipe321", 0.0));
+        clients.add(new Client("Gabriela Alves", "777.777.777-77", "gabriela.alves@email.com", "gabi_2024", 75.0));
+        clients.add(new Client("Hugo Pereira", "888.888.888-88", "hugo.pereira@email.com", "hugo987", 10.0));
+        clients.add(new Client("Isabela Rocha", "999.999.999-99", "isabela.rocha@email.com", "isa1234", 0.0));
+        clients.add(new Client("João Martins", "000.000.000-00", "joao.martins@email.com", "joao555", 60.0));
 
         // Itens do cardápio de teste
         // Burgers (Hambúrgueres)
@@ -85,5 +100,83 @@ public class Database {
 
     public static ArrayList<Order> getOrders() {
         return orders;
+    }
+
+    public static ArrayList<Table> getTables() {
+        return tables;
+    }
+
+    public static Table getTableByNumber(int number) {
+        for (Table t : tables) {
+            if (t.getNumber() == number) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public static String generateUniqueTableCode() {
+        Random random = new Random();
+        String newCode;
+        boolean exists;
+        do {
+            newCode = String.format("%04d", random.nextInt(10000));
+            exists = false;
+            for (Table t : tables) {
+                if (t.getStatus() == TableStatus.OCCUPIED && newCode.equals(t.getCode())) {
+                    exists = true;
+                    break;
+                }
+            }
+        } while (exists);
+        return newCode;
+    }
+
+    public static Table occupyTable(int number) {
+        Table t = getTableByNumber(number);
+        if (t != null && t.getStatus() == TableStatus.FREE) {
+            String uniqueCode = generateUniqueTableCode();
+            t.occupyTable(uniqueCode);
+            return t;
+        }
+        return null;
+    }
+
+    public static void freeTable(int number) {
+        Table t = getTableByNumber(number);
+        if (t != null) {
+            t.freeTable();
+        }
+    }
+
+    public static ArrayList<Bill> getActiveBills() {
+        return activeBills;
+    }
+
+    public static void addActiveBill(Bill bill) {
+        activeBills.add(bill);
+    }
+
+    public static void removeActiveBill(Bill bill) {
+        activeBills.remove(bill);
+    }
+
+    public static Bill getActiveBillByTable(int tableNumber) {
+        for (Bill b : activeBills) {
+            if (b.getTable() != null && b.getTable().getNumber() == tableNumber) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public static Bill getActiveBillByClient(Client client) {
+        if (client == null) return null;
+        for (Bill b : activeBills) {
+            if (b.getClient() != null && client.getEmail().equalsIgnoreCase(b.getClient().getEmail())) {
+                return b;
+            }
+        }
+        return null;
     }
 }
