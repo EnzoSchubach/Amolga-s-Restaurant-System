@@ -7,13 +7,23 @@ public class Order {
 
     static private int orderId = 1;
     private int id;
+    private Client client;
+    private Table table;
     private HashMap<MenuItem, Integer> items;
     private OrderStatus status;
     
-    public Order() {
+    public Order () {
+        this.id = orderId++;
+        this.items = new HashMap<>();
+        this.status = OrderStatus.PENDING;   
+    }
+    
+    public Order(Client client, Table table) {
         this.id = orderId++;
         this.items = new HashMap<>();
         this.status = OrderStatus.PENDING;
+        this.client = client;
+        this.table = table;
     }
     
     public int getId(){
@@ -22,6 +32,22 @@ public class Order {
 
     public HashMap<MenuItem, Integer> getItems(){
         return items;
+    }
+    
+    public Client getClient () {
+        return client;
+    }
+    
+    public Table getTable () {
+        return table;
+    }
+    
+    public void setClient (Client client) {
+        this.client = client;
+    }
+    
+    public void setTable (Table table) {
+        this.table = table;
     }
 
     /**

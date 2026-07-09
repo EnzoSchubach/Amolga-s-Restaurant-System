@@ -3,6 +3,7 @@ package com.amolga.mavenproject1.view;
 import com.amolga.mavenproject1.model.MenuItem;
 import com.amolga.mavenproject1.model.Food;
 import com.amolga.mavenproject1.model.Drink;
+import com.amolga.mavenproject1.model.Table;
 import com.amolga.mavenproject1.model.Database;
 import com.amolga.mavenproject1.model.Bill;
 import com.amolga.mavenproject1.model.Client;
@@ -20,6 +21,7 @@ public class MenuScreen extends javax.swing.JFrame {
     private final ArrayList<MenuItem> menuItems = new ArrayList<>();
     private Bill activeBill;
     private Client loggedClient;
+    private Table currentTable;
     private com.amolga.mavenproject1.model.Order currentOrder;
     /**
      * Creates new form MenuScreen
@@ -41,7 +43,9 @@ public class MenuScreen extends javax.swing.JFrame {
     public MenuScreen(Bill bill) {
         this.activeBill = bill;
         this.loggedClient = bill != null ? bill.getClient() : null;
-        this.currentOrder = new com.amolga.mavenproject1.model.Order();
+        this.currentTable = bill != null ? bill.getTable() : null;
+        
+        this.currentOrder = new com.amolga.mavenproject1.model.Order(loggedClient, currentTable);
         initComponents();
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);

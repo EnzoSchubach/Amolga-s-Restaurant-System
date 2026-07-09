@@ -12,6 +12,8 @@ public class Client {
     private String name, cpf, email, password;
     private double bonus;
     
+    public Client () {};
+    
     public String getName(){
         return this.name;
     }
