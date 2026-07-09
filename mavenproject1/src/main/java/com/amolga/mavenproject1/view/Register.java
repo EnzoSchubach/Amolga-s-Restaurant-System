@@ -5,6 +5,7 @@
 package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Client;
+import com.amolga.mavenproject1.model.Database;
 
 import com.amolga.mavenproject1.model.Database;
 import java.util.ArrayList;
@@ -381,11 +382,11 @@ public class Register extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this,"As senhas não coincidem.","Erro de confirmação",javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        Client client = new Client(name, cpf, email, password, 0);
+        Client client = new Client(name, cpf, email, password, 0.0);
         Database.addClients(client);
-        InitialScreen menu = new InitialScreen(client);
-        menu.setVisible(true);
+        javax.swing.JOptionPane.showMessageDialog(this, "Conta criada com sucesso!", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        InitialScreen mainScreen = new InitialScreen(client);
+        mainScreen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registerButtonActionPerformed
 

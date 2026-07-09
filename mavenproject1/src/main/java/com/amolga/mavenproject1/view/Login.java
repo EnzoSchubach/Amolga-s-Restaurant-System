@@ -5,6 +5,7 @@
 package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Client;
+import com.amolga.mavenproject1.model.Database;
 import java.util.ArrayList;
 import com.amolga.mavenproject1.model.Database;
 
@@ -23,7 +24,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.clients.addAll(Database.getClients());
-        
         textEmailLogin.setForeground(java.awt.Color.GRAY);
         textEmailLogin.setText("exemplo@gmail.com");
 
@@ -197,8 +197,8 @@ public class Login extends javax.swing.JFrame {
         }
 
         if (logged != null) {
-            InitialScreen menu = new InitialScreen(logged);
-            menu.setVisible(true);
+            InitialScreen mainScreen = new InitialScreen(logged);
+            mainScreen.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_enterButtonActionPerformed

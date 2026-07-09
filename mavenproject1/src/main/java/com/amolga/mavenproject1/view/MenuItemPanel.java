@@ -167,6 +167,13 @@ public class MenuItemPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_minusButtonActionPerformed
 
+    public int getQuantity() {
+        return this.actualQuantity;
+    }
+
+    public MenuItem getItem() {
+        return this.item;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JScrollPane jScrollPane1;

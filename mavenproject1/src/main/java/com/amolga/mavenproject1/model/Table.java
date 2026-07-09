@@ -11,6 +11,7 @@ package com.amolga.mavenproject1.model;
 public class Table {
     private int number;
     private TableStatus status;
+    private String code;
        
     public int getNumber(){
         return this.number;
@@ -28,16 +29,29 @@ public class Table {
         this.status = status;
     }
     
+    public String getCode() {
+        return this.code;
+    }
+    
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
     public Table(int number){
         setNumber(number);
         setStatus(TableStatus.FREE);
+        this.code = null;
     }
     
-    public void occupyTable(){
-        if(status ==TableStatus.FREE) status = TableStatus.OCCUPIED;
+    public void occupyTable(String code){
+        if(status == TableStatus.FREE) {
+            status = TableStatus.OCCUPIED;
+            this.code = code;
+        }
     }
     
     public void freeTable(){
         this.status = TableStatus.FREE;
+        this.code = null;
     }
 }
