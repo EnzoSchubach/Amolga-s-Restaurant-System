@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
         //lista de teste, nao sera utilizada na versão final
         clientes = new ArrayList<>();
