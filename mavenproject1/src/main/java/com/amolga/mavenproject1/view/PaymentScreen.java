@@ -9,7 +9,8 @@ import com.amolga.mavenproject1.model.MenuItem;
 
 public class PaymentScreen extends javax.swing.JFrame {
 
-    private Bill bill;
+    private final Bill bill;
+
 
     private JLabel lblTableName;
     private JLabel lblClientName;
@@ -196,8 +197,8 @@ public class PaymentScreen extends javax.swing.JFrame {
         double subtotal = 0;
         if (bill.getOrders() != null) {
             for (Order o : bill.getOrders()) {
-                if (o.getItens() != null) {
-                    for (Map.Entry<MenuItem, Integer> entry : o.getItens().entrySet()) {
+                if (o.getItems() != null) {
+                    for (Map.Entry<MenuItem, Integer> entry : o.getItems().entrySet()) {
                         MenuItem item = entry.getKey();
                         int qty = entry.getValue();
                         double price = item.getPrice() * qty;

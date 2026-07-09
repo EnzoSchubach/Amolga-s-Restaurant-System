@@ -4,6 +4,7 @@ import com.amolga.mavenproject1.model.MenuItem;
 import com.amolga.mavenproject1.model.Food;
 import com.amolga.mavenproject1.model.Drink;
 import com.amolga.mavenproject1.model.Database;
+import com.amolga.mavenproject1.model.Client;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -16,13 +17,19 @@ public class MenuScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuScreen.class.getName());
     private final ArrayList<MenuItem> menuItems = new ArrayList<>();
-
-    
+    private Client loggedClient;
+    private com.amolga.mavenproject1.model.Order currentOrder;
     
     /**
      * Creates new form MenuScreen
      */
     public MenuScreen() {
+        this(null);
+    }
+    
+    public MenuScreen(Client loggedClient) {
+        this.loggedClient = loggedClient;
+        this.currentOrder = new com.amolga.mavenproject1.model.Order();
         initComponents();
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
@@ -36,7 +43,7 @@ public class MenuScreen extends javax.swing.JFrame {
         gridPanel.setLayout(new java.awt.GridLayout(0, 2, 15, 15));
         
         for (MenuItem item : menuItems) {
-            gridPanel.add(new MenuItemPanel(item));
+            gridPanel.add(new MenuItemPanel(item, currentOrder));
         }
         
         jScrollPane1.setViewportView(gridPanel);
@@ -115,13 +122,24 @@ public class MenuScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Pedido confirmado com sucesso! Ele foi adicionado à sua lista de pedidos.", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        populateMenu();
+        if (currentOrder == null || currentOrder.getItems().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, adicione itens ao pedido antes de confirmar.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        com.amolga.mavenproject1.model.Bill bill = new com.amolga.mavenproject1.model.Bill();
+        bill.setClient(loggedClient);
+        bill.getOrders().add(currentOrder);
+        
+        PaymentScreen paymentScreen = new PaymentScreen(bill);
+        paymentScreen.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Pedido cancelado e limpo com sucesso.", "Cancelado", javax.swing.JOptionPane.WARNING_MESSAGE);
-        populateMenu();
+        InitialScreen initial = new InitialScreen(loggedClient);
+        initial.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
@@ -142,10 +160,8 @@ public class MenuScreen extends javax.swing.JFrame {
             });
             popupMenu.add(jMenuItem);
         }
-        // Shows the menu directly underneath the rmvButton
         popupMenu.show(rmvButton, 0, rmvButton.getHeight());
     }
-
     
     /**
      * @param args the command line arguments
