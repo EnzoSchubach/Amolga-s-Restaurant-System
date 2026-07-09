@@ -12,6 +12,12 @@ public class Order {
     private HashMap<MenuItem, Integer> items;
     private OrderStatus status;
     
+    public Order () {
+        this.id = orderId++;
+        this.items = new HashMap<>();
+        this.status = OrderStatus.PENDING;   
+    }
+    
     public Order(Client client, Table table) {
         this.id = orderId++;
         this.items = new HashMap<>();
