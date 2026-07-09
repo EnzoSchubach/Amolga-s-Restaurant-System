@@ -16,6 +16,7 @@ public class MenuItemPanel extends javax.swing.JPanel {
     
     private int actualQuantity;
     private MenuItem item;
+    private com.amolga.mavenproject1.model.Order order;
     
     /**
      * Creates new form MenuItemPanel
@@ -26,9 +27,10 @@ public class MenuItemPanel extends javax.swing.JPanel {
         setOpaque(false);
     }
     
-    public MenuItemPanel(MenuItem item) {
+    public MenuItemPanel(MenuItem item, com.amolga.mavenproject1.model.Order order) {
         this();
         this.item = item;
+        this.order = order;
         if (item != null) {
             menuItemLabel.setText(item.getName() + " - R$ " + String.format("%.2f", item.getPrice()));
             if (item instanceof Food food) {
@@ -150,18 +152,28 @@ public class MenuItemPanel extends javax.swing.JPanel {
     private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusButtonActionPerformed
         this.actualQuantity++;
         this.quantityLabel.setText(String.valueOf(this.actualQuantity));
-//        order.addItem(item);
+        if (order != null) {
+            order.addItem(item);
+        }
     }//GEN-LAST:event_plusButtonActionPerformed
 
     private void minusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusButtonActionPerformed
-        if(this.actualQuantity>0){ //prevents negative numbers
+        if (this.actualQuantity > 0) {
             this.actualQuantity--;
             this.quantityLabel.setText(String.valueOf(this.actualQuantity));
-//            order.removeItem(item);
+            if (order != null) {
+                order.removeItem(item);
+            }
         }
     }//GEN-LAST:event_minusButtonActionPerformed
 
+    public int getQuantity() {
+        return this.actualQuantity;
+    }
 
+    public MenuItem getItem() {
+        return this.item;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JScrollPane jScrollPane1;

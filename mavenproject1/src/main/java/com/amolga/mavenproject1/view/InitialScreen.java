@@ -5,6 +5,11 @@
 package com.amolga.mavenproject1.view;
 
 import com.amolga.mavenproject1.model.Client;
+import com.amolga.mavenproject1.model.Database;
+import com.amolga.mavenproject1.model.Bill;
+import com.amolga.mavenproject1.model.Table;
+import com.amolga.mavenproject1.model.TableStatus;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +19,7 @@ import com.amolga.mavenproject1.model.Client;
 public class InitialScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InitialScreen.class.getName());
+    ArrayList<Client>  clients;
     private Client loggedClient;
     /**
      * Creates new form MainRestaurant
@@ -40,6 +46,7 @@ public class InitialScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         restaurantText = new javax.swing.JLabel();
         menu = new javax.swing.JButton();
+        kitchen = new javax.swing.JButton();
         login = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -70,6 +77,22 @@ public class InitialScreen extends javax.swing.JFrame {
         });
         menu.addActionListener(this::menuActionPerformed);
 
+        kitchen.setFont(new java.awt.Font("Liberation Sans", 0, 22)); // NOI18N
+        kitchen.setText("Cozinha");
+        kitchen.setBorder(null);
+        kitchen.setBorderPainted(false);
+        kitchen.setContentAreaFilled(false);
+        kitchen.setFocusPainted(false);
+        kitchen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                kitchenMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                kitchenMouseExited(evt);
+            }
+        });
+        kitchen.addActionListener(this::kitchenActionPerformed);
+
         login.setFont(new java.awt.Font("Liberation Sans", 0, 22)); // NOI18N
         login.setText("Login");
         login.setBorder(null);
@@ -92,9 +115,11 @@ public class InitialScreen extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(restaurantText, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(restaurantText, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(204, 204, 204)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -110,7 +135,8 @@ public class InitialScreen extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kitchen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(16, 16, 16))
         );
 
@@ -208,12 +234,72 @@ public class InitialScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_loginActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        boolean loginUsuario = false;
+        boolean loginUsuario = (this.loggedClient != null);
         
-        if(loginUsuario){
-            MenuScreen screenMenu = new MenuScreen();
-            screenMenu.setVisible(true);
-            this.dispose();
+        if (loginUsuario) {
+            Bill activeBill = Database.getActiveBillByClient(loggedClient);
+            if (activeBill == null) {
+                // Seleção de mesa
+                ArrayList<String> freeTableOptions = new ArrayList<>();
+                for (Table t : Database.getTables()) {
+                    if (t.getStatus() == TableStatus.FREE) {
+                        freeTableOptions.add("Mesa " + t.getNumber());
+                    }
+                }
+                if (freeTableOptions.isEmpty()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Desculpe, todas as mesas estão ocupadas no momento.", "Sem Mesas Disponíveis", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                String selectedStr = (String) javax.swing.JOptionPane.showInputDialog(
+                    this,
+                    "Selecione uma mesa disponível:",
+                    "Seleção de Mesa",
+                    javax.swing.JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    freeTableOptions.toArray(),
+                    freeTableOptions.get(0)
+                );
+                if (selectedStr == null) return; // Cancelado
+                int tableNum = Integer.parseInt(selectedStr.replace("Mesa ", ""));
+                Table table = Database.occupyTable(tableNum);
+                if (table != null) {
+                    Bill bill = new Bill();
+                    bill.setClient(loggedClient);
+                    bill.setTable(table);
+                    Database.addActiveBill(bill);
+                    javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "Mesa " + tableNum + " ocupada com sucesso!\nSua senha temporária de acesso é: " + table.getCode() + "\nPor favor, guarde esta senha para o pagamento.",
+                        "Mesa Reservada",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE
+                    );
+                    
+                    MenuScreen screenMenu = new MenuScreen(bill);
+                    screenMenu.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                // Já possui mesa ativa
+                Object[] options = {"Fazer Novo Pedido", "Pedir Conta / Pagar", "Voltar"};
+                int choice = javax.swing.JOptionPane.showOptionDialog(
+                    this,
+                    "Mesa " + activeBill.getTable().getNumber() + " ativa.\nO que deseja fazer?",
+                    "Menu da Mesa",
+                    javax.swing.JOptionPane.YES_NO_CANCEL_OPTION,
+                    javax.swing.JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+                );
+                if (choice == javax.swing.JOptionPane.YES_OPTION) {
+                    MenuScreen screenMenu = new MenuScreen(activeBill);
+                    screenMenu.setVisible(true);
+                    this.dispose();
+                } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
+                    PaymentScreen paymentScreen = new PaymentScreen(activeBill);
+                    paymentScreen.setVisible(true);
+                }
+            }
         } else {
             Object[] options = {"OK"};
             int resposta = javax.swing.JOptionPane.showOptionDialog(this,
@@ -252,6 +338,21 @@ public class InitialScreen extends javax.swing.JFrame {
         login.setContentAreaFilled(false);
     }//GEN-LAST:event_loginMouseExited
 
+    private void kitchenActionPerformed(java.awt.event.ActionEvent evt) {
+        KitchenScreen kitchenScreen = new KitchenScreen();
+        kitchenScreen.setVisible(true);
+        this.dispose();
+    }
+
+    private void kitchenMouseEntered(java.awt.event.MouseEvent evt) {
+        kitchen.setBackground(new java.awt.Color(255, 255, 255));
+        kitchen.setContentAreaFilled(true);
+    }
+
+    private void kitchenMouseExited(java.awt.event.MouseEvent evt) {
+        kitchen.setContentAreaFilled(false);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -283,6 +384,7 @@ public class InitialScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton kitchen;
     private javax.swing.JButton login;
     private javax.swing.JButton menu;
     private javax.swing.JLabel restaurantText;

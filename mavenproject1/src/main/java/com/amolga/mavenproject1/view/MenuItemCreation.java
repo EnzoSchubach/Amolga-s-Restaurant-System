@@ -180,10 +180,8 @@ public class MenuItemCreation extends javax.swing.JFrame {
 
         double price = 0.0;
         try {
-            // Se o usuário usou vírgula, trocamos por ponto
             String priceText = priceField.getText().replace(",", ".").trim();
             if (priceText.isEmpty()) {
-                // Tenta ler do valor formatado ou direto se não tiver formatador ativo
                 Object val = priceField.getValue();
                 if (val instanceof Number) {
                     price = ((Number) val).doubleValue();
