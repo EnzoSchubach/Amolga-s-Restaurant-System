@@ -200,7 +200,9 @@ public class Login extends javax.swing.JFrame {
         }
 
         if (logged != null) {
-            // voltar pro menu
+            InitialScreen menu = new InitialScreen(logged);
+            menu.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_enterButtonActionPerformed
 
