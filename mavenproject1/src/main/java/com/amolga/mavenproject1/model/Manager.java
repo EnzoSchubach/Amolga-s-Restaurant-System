@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class Manager {
     private int id;
     private String password;
-    private Restaurant restaurant;
+    private Database database;
     
-    public Manager(int id, String password, Restaurant restaurant){
+    public Manager(int id, String password, Database database){
         this.id = id;
         this.password = password;
-        this.restaurant = restaurant;
+        this.database = database;
     }
     
     public void registerItem(String name, String type, String description, String supplier, double price){
@@ -33,7 +33,7 @@ public class Manager {
         }
         
         if (newItem != null) {
-            this.restaurant.getMenu().add(newItem);
+            this.database.getItems().add(newItem);
             System.out.println("Item cadastrado.");
         } else {
             System.out.println("Não reconhecido. Escolha 'Food' ou 'Drink'");
@@ -41,7 +41,7 @@ public class Manager {
     }
     
     public void removeItem(MenuItem rmvItem){
-        List<MenuItem> menuAtual = (this.restaurant != null) ? this.restaurant.getMenu() : this.mainMenu;
+        List<MenuItem> menuAtual = (this.database != null) ? this.database.getItems() : this.mainMenu;
         if (menuAtual != null && menuAtual.contains(rmvItem)) {
             menuAtual.remove(rmvItem);
             Database.removePItems(rmvItem);
@@ -67,12 +67,12 @@ public class Manager {
         this.password = password;
     }
     
-        public Restaurant getRestaurant() {
-        return this.restaurant; 
+    public Database getDatabase() {
+        return this.database; 
     }
         
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setDatabase(Database database) {
+        this.database = database;
     }
 
 

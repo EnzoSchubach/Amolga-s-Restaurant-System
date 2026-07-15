@@ -73,11 +73,7 @@ public class Order {
     public void finishOrder(){ 
         status = OrderStatus.FINISHED; 
     }
-    
-    public void deliveredOrder() { 
-        status = OrderStatus.DELIVERED; 
-    }
-
+   
     public void pendingOrder() {
         status = OrderStatus.PENDING;
     }

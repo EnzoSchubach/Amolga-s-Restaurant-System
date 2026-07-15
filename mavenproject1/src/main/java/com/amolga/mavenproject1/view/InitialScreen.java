@@ -7,9 +7,12 @@ package com.amolga.mavenproject1.view;
 import com.amolga.mavenproject1.model.Client;
 import com.amolga.mavenproject1.model.Database;
 import com.amolga.mavenproject1.model.Bill;
+import com.amolga.mavenproject1.model.Order;
+import com.amolga.mavenproject1.model.OrderStatus;
 import com.amolga.mavenproject1.model.Table;
 import com.amolga.mavenproject1.model.TableStatus;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -246,6 +249,17 @@ public class InitialScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginActionPerformed
 
+    
+    private boolean hasPendingOrders(Bill activeBill){
+        int tam = activeBill.getOrders().size();
+        int pending = 0;
+        for(Order o : activeBill.getOrders()){
+            if(o.getStatus() == OrderStatus.PENDING) pending++;
+        }
+        if(pending > 0) return true;
+        return false;
+    }
+                    
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
         boolean loginUsuario = (this.loggedClient != null);
         
@@ -309,6 +323,10 @@ public class InitialScreen extends javax.swing.JFrame {
                     screenMenu.setVisible(true);
                     this.dispose();
                 } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
+                    if(hasPendingOrders(activeBill)){
+                        JOptionPane.showMessageDialog(this, "Pedidos pendentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     PaymentScreen paymentScreen = new PaymentScreen(activeBill);
                     paymentScreen.setVisible(true);
                 }
