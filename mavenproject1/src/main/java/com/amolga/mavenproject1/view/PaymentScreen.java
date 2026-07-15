@@ -103,7 +103,7 @@ public class PaymentScreen extends javax.swing.JFrame {
         pnlForm.add(pnlMethod);
 
         pnlForm.add(new JLabel("  Taxa Adm (%):"));
-        tfFee = new JLabel("2.0");
+        tfFee = new JLabel("0.0");
         tfFee.setFont(new Font("Arial", Font.BOLD, 12));
         pnlForm.add(tfFee);
 
@@ -163,7 +163,7 @@ public class PaymentScreen extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 cbInstallments.setEnabled(false);
                 cbInstallments.setSelectedIndex(0);
-                tfFee.setText("2.0");
+                tfFee.setText("0.0");
                 calculateTotals();
             }
         });
