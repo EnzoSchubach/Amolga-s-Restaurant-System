@@ -6,12 +6,12 @@ package com.amolga.mavenproject1.model;
 
 public class Debit extends PaymentMethod {
 
-    public Debit(double administrativeFee) {
-        super(administrativeFee, "Debit");
+    public Debit() {
+        super("Debit");
     }
 
     @Override
     public double calcValue(double baseValue) {
-        return baseValue * (1 + administrativeFee);
+        return baseValue ;
     }
 }
